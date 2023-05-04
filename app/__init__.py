@@ -2,6 +2,9 @@ from flask import Flask, render_template, session, request, redirect
 import sqlite3
 import os #?
 #more imports for other files later
+from api_handle import *
+from table_handle import *
+
 
 app = Flask(__name__)
 
@@ -39,6 +42,13 @@ def authenticate():
   session['username'] = request.form['username']
   return redirect('/home')
 
+#TODO: 
+#Way to add and save playlists
+#Display wordcloud on playlist
+#Rip lyrics for wordcloud AND display
+#Select songs to play
+#Play songs
+#Search query entry from html, dubbed "entry" for the request
 @app.route('/home', methods=['GET', 'POST'])
 def home():
     #maybe unnecessary? 
