@@ -3,27 +3,56 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>
-            Ctrl Alt Defeat Home
+            register
         </title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     </head>
     <body>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-        <div> 
-            <h1>Lyle Lyle Crocodile Karaoke</h1>
-        </div>
-        <nav class= "navbar">
-            <a class="navbar-brand" href="#">
-                <img src="../static/lyle.png">
-            </a>
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#Playlists">Playlists</a>
-                </li>
-            </ul>        
-        </nav>
+        <div class="container-fluid" style = "height: 100vh">
+            <div class="row">
+              <div class="col">
+                <div class="d-flex align-items-center py-5">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col col-lg-8 mx-auto">
+                        <a href="/">
+                          <img src = "../static/lyle.png" class="rounded mx-auto d-block" style = "height: 80px; width:80px">
+                        </a>
+                        <h3 class="login-heading m-3 text-center">Sign Up</h3>
+                        <form class="px-4 py-3" action ="/register" method="POST">
+                          
+                          <div class="form-floating m-3">
+                            <input required type="text" class="form-control" name="username" id="form_user" placeholder="Username">
+                            <label for="form_user">Username</label>
+                          </div>
+                          
+                          <div class="form-floating m-3">
+                            <input required type="password" class="form-control" name="password" id="form_password" placeholder="Password">
+                            <label for="form_password">Password</label>
+                          </div>
+                          
+                          <div class="form-floating m-3">
+                            <input required type="password" class="form-control" name="password_confirm" id="form_password" placeholder="Password">  
+                            <label for="form_password">Confirm Password</label>
+                          </div>
+          
+                          <div class="text-center">
+                            <br> <button type="submit" class="user_button btn btn-lg" name="sub1" value="Sign In">Sign up</button>
+                          </div>
+                          
+                        </form>
+                      </div> <!-- close container to center stuff -->
+                      <div class="container-fluid text-center">
+                        <p class="text-danger">{{status}}</p>
+                        <p> Already have an account? </p> 
+                        <form action="/login" method="GET">
+                          <button class="user_button btn btn-lg" value="login" name="sub1">Login</button>
+                        </form>  
+                      </div>  <!-- close login container -->
+                  </div>
+                  </div>
+                </div>
+                </div>
     </body>
 </html>
