@@ -18,11 +18,12 @@ yuki -- 2023-05-04 13:45
 
 ===============================
 
-emilyO -- 2023-05-05 13:40
+emilyO -- 2023-05-05 13:55
 - uploaded new design doc
 revisions to design doc:
 - clarified what site does
 - html files with statuses and fields needed
+- site layout drawing
 - methods needed for APIs
 - table organization in DB
 - methods needed for DB
