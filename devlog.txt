@@ -8,3 +8,8 @@ bread -- 2023-05-04 13:39
 - Started skeleton of flask
 - made api.py, tentatively
 - made db.py, tentatively
+
+===============================
+
+yuki -- 2023-05-04 13:45
+- made html files for index login and register
