@@ -1,3 +1,5 @@
+===============================
+
 emilyO -- 2023-04-28 14:35
 - configured repo 
 
@@ -13,3 +15,19 @@ bread -- 2023-05-04 13:39
 
 yuki -- 2023-05-04 13:45
 - made html files for index login and register
+
+===============================
+
+emilyO -- 2023-05-05 13:40
+- uploaded new design doc
+revisions to design doc:
+- clarified what site does
+- html files with statuses and fields needed
+- methods needed for APIs
+- table organization in DB
+- methods needed for DB
+- consideration for local data or pulling data
+- consideration for how to store playlists
+- updated components and site map
+
+===============================
