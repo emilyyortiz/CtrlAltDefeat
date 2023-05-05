@@ -9,35 +9,39 @@ from table_handle import *
 app = Flask(__name__)
 
 #for later
-#app.secret_key - os.urandom(32)
+app.secret_key = os.urandom(32)
 
 #i forgot difference between get/post!
 #code not shamelessly repurposed from p3
 @app.route('/', methods=['GET'])
 def login():
-    if 'username' in session:
+    #if 'username' in session: #when cookie work
+    if(False):
         return redirect('/home')
     return render_template('login.html') #names subject to change
 
-@app.route('/register', methods=['GET'])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
   return render_template('register.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
 def make_account():
-  if user_exist(request.form.get('username')):
+  #if user_exist(request.form.get('username')): #NEED a method to verify if a username is taken
+  if(False):
     return render_template('register.html', status='Username is in use!')
 
   #new entry
   if (request.form.get('password') != request.form.get('password-confirm')):
     return render_template('register.html', status='The passwords typed are not the same!')
-  create_user(request.form.get('username'), request.form.get('password'))
+  #create_user(request.form.get('username'), request.form.get('password')) #NEED method to create an entry in the table
   session['username'] = request.form['username']
-  return redirect('/home')
+  print(session['username'])
+  return redirect('/') #/home or /
   
 @app.route('/auth', methods=['GET', 'POST'])
 def authenticate():
-  if not verify(request.form.get('username'), request.form.get('password')):
+  #if not verify(request.form.get('username'), request.form.get('password')): #NEED method to take in a username and password and return if that entry exists
+  if(False):
     return render_template('login.html', status='Incorrect login info')
   session['username'] = request.form['username']
   return redirect('/home')
@@ -55,6 +59,19 @@ def home():
     if ('username' in session):
         return redirect('/')
     return render_template('index.html')
+
+#Create wordclouds: 
+def wordify(username user): #each login only has one playlist, maybe have a default param or id param?
+    pl = {}
+    dic = {}
+    #get playlist method
+    for(song : playlist):
+      lyric = get_lyrics(song)
+      #get lyric method
+
+      #parsing of a dictionary 
+
+
 
 
 if __name__ == '__main__':
