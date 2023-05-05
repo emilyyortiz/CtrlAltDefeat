@@ -52,7 +52,7 @@ def authenticate():
 @app.route('/home', methods=['GET', 'POST'])
 def home():
     #maybe unnecessary? 
-    if !('username' in session):
+    if ('username' in session):
         return redirect('/')
     return render_template('index.html')
 
