@@ -45,3 +45,10 @@ emilyO -- 2023-05-08 13:15
 - added button on login page and js that makes the button text change (to demo js linkage for hw)
 
 ===============================
+
+bread -- 2023-05-08 14:04
+- outlined major skeleton for homepage
+
+yuki -- 2023-05-08 12:05
+- worked on JS for search button
+- cleaned up index
