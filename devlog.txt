@@ -31,6 +31,14 @@ revisions to design doc:
 - consideration for how to store playlists
 - updated components and site map
 
+bread -- 2023-05-05 13:55
+- set out method requirements from API and DB
+- started pseudocode on site
+- tried to figure out cookies lol 
+
+yuki -- 2023-05-05 13:55
+- worked on index
+
 ===============================
 
 emilyO -- 2023-05-08 13:15
