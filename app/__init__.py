@@ -3,7 +3,7 @@ import sqlite3
 import os #?
 #more imports for other files later
 from api_handle import *
-# from table_handle import *
+from table_handle import *
 
 
 app = Flask(__name__)
@@ -47,12 +47,14 @@ def authenticate():
   return redirect('/home')
 
 #TODO: 
-#Way to add and save playlists
-#Display wordcloud on playlist
-#Rip lyrics for wordcloud AND display
-#Select songs to play
-#Play songs
-#Search query entry from html, dubbed "entry" for the request
+#Display wordcloud on playlist  OUTLINED
+#Rip lyrics for wordcloud AND display  OUTLINED
+#Select songs to play  OUTLINED
+#Play songs from button  OUTLINED
+#Search query entry from html, "entry" for the request
+
+#MAIN ISSUES: 
+#should the cover be updated every time the page is viewed? Seems intensive on the API
 @app.route('/home', methods=['GET', 'POST'])
 def home():
     #maybe unnecessary? 
@@ -60,18 +62,52 @@ def home():
         return redirect('/')
     return render_template('index.html')
 
-# #Create wordclouds: 
-# def wordify(username, user): #each login only has one playlist, maybe have a default param or id param?
-#     pl = {}
-#     dic = {}
-#     #get playlist method
-#     for(song : playlist):
-#       lyric = get_lyrics(song)
-#       #get lyric method
+'''
+ #returns a dictionary with the number of instances of each word in a playlist: 
+pl = [] #String array of songs in playlist
+dic = {string w : int num} #future dictoinary containing all words in playlist
 
-#       #parsing of a dictionary 
+#SAVE INFORMATION AS JSON OR ARRAY?
+link = []  #string array of links to be used to play audio (if this becomes the used method)
+artist = []  #string array of artist names to be displayed
+current_song =  #necessary? pass in argument from form-action in HTML
 
+#get playlist method, load into array, find song information
+for(song : playlist):
 
+  lyric = get_lyrics(song)
+  #get lyric method
+
+  #ALSO GET MORE INFORMATION ABOUT THE SONG TO DISPLAY! (FROM API)
+  #artist name
+  #song name
+  #song link
+  link[].append(get_link(song))
+
+  #parsing of a dictionary for wordcloud
+  for word in lyric.split(): #splits by spaces hopefully
+    if(lyric.get(word)==none):
+      lyric[word].append(1)
+    else:
+      lyric[word].update({word: lyric.get(word) + 1})
+      
+#wordcloud method
+cloud = get_cloud(lyric)
+
+return render_template('index.html', 
+word_cloud = cloud, 
+YTlinks = link, 
+playlist = pl, 
+artists = artist, 
+cur = current_song)
+
+#PAGE TAKES: 
+# A image (?) type word cloud
+# An array of youtube links
+# An array of song names
+# An array of artist names
+# The current song being played
+'''
 
 
 if __name__ == '__main__':
