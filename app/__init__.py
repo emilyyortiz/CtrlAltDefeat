@@ -3,7 +3,7 @@ import sqlite3
 import os #?
 #more imports for other files later
 from api_handle import *
-from table_handle import *
+# from table_handle import *
 
 
 app = Flask(__name__)
@@ -60,16 +60,16 @@ def home():
         return redirect('/')
     return render_template('index.html')
 
-#Create wordclouds: 
-def wordify(username user): #each login only has one playlist, maybe have a default param or id param?
-    pl = {}
-    dic = {}
-    #get playlist method
-    for(song : playlist):
-      lyric = get_lyrics(song)
-      #get lyric method
+# #Create wordclouds: 
+# def wordify(username, user): #each login only has one playlist, maybe have a default param or id param?
+#     pl = {}
+#     dic = {}
+#     #get playlist method
+#     for(song : playlist):
+#       lyric = get_lyrics(song)
+#       #get lyric method
 
-      #parsing of a dictionary 
+#       #parsing of a dictionary 
 
 
 
