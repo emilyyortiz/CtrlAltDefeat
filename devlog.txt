@@ -49,6 +49,10 @@ emilyO -- 2023-05-08 13:15
 bread -- 2023-05-08 14:04
 - outlined major skeleton for homepage
 
+===============================
+
 yuki -- 2023-05-08 12:05
 - worked on JS for search button
 - cleaned up index
+
+===============================
