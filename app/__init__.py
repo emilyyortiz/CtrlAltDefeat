@@ -11,6 +11,8 @@ app = Flask(__name__)
 #for later
 app.secret_key = os.urandom(32)
 
+
+
 #i forgot difference between get/post!
 #code not shamelessly repurposed from p3
 @app.route('/', methods=['GET'])
@@ -36,7 +38,7 @@ def make_account():
   create_user(request.form.get('username'), request.form.get('password')) #NEED method to create an entry in the table
   session['username'] = request.form['username']
   print(session['username'])
-  return redirect('/') #/home or /
+  return redirect('/home') #/home or /
   
 @app.route('/auth', methods=['GET', 'POST'])
 def authenticate():
