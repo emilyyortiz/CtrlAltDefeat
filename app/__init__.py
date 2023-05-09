@@ -15,8 +15,8 @@ app.secret_key = os.urandom(32)
 #code not shamelessly repurposed from p3
 @app.route('/', methods=['GET'])
 def login():
-    #if 'username' in session: #when cookie work
-    if(False):
+    if 'username' in session: #when cookie work
+    #if(False):
         return redirect('/home')
     return render_template('login.html') #names subject to change
 
@@ -26,22 +26,22 @@ def register():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def make_account():
-  #if user_exist(request.form.get('username')): #NEED a method to verify if a username is taken
-  if(False):
+  if check_user(request.form.get('username')): #NEED a method to verify if a username is taken
+  #if(False):
     return render_template('register.html', status='Username is in use!')
 
   #new entry
   if (request.form.get('password') != request.form.get('password-confirm')):
     return render_template('register.html', status='The passwords typed are not the same!')
-  #create_user(request.form.get('username'), request.form.get('password')) #NEED method to create an entry in the table
+  create_user(request.form.get('username'), request.form.get('password')) #NEED method to create an entry in the table
   session['username'] = request.form['username']
   print(session['username'])
   return redirect('/') #/home or /
   
 @app.route('/auth', methods=['GET', 'POST'])
 def authenticate():
-  #if not verify(request.form.get('username'), request.form.get('password')): #NEED method to take in a username and password and return if that entry exists
-  if(False):
+  if not check_pass(request.form.get('username'), request.form.get('password')): #NEED method to take in a username and password and return if that entry exists
+  #if(False):
     return render_template('login.html', status='Incorrect login info')
   session['username'] = request.form['username']
   return redirect('/home')
@@ -63,7 +63,7 @@ def home():
     return render_template('index.html')
 
 '''
- #returns a dictionary with the number of instances of each word in a playlist: 
+#returns a dictionary with the number of instances of each word in a playlist: 
 pl = [] #String array of songs in playlist
 dic = {string w : int num} #future dictoinary containing all words in playlist
 
@@ -107,8 +107,8 @@ cur = current_song)
 # An array of song names
 # An array of artist names
 # The current song being played
-'''
 
+'''
 
 if __name__ == '__main__':
     app.debug = True

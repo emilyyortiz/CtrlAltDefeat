@@ -52,3 +52,5 @@ print(create_user('u','p'))
 print(check_user('u'))
 print(check_pass('u','p'))
 #DB MANAGEMENT
+
+db.close()
