@@ -8,10 +8,9 @@ var textChange = function() {
 var dasbut = document.getElementById("b");
 dasbut.addEventListener('click', ()=>{textChange()});
 
-var searchBtn = document.getElementById("songSearchBtn");
-
-var search = loadButton() {  
-    searchBtn.innerHTML = "loading";
+var loadButton = function(Button) {
+    
+    searchBtn.innerHTML = "Loading";
 }
 
-searchBtn.addEventListener('click', loadButton)
+var searchBtn = document.getElementById("songSearchBtn");
