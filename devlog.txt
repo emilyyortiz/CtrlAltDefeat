@@ -64,6 +64,9 @@ bread -- 2023-05-09 14:10
 - fixed some table_handle problems
 - continued trying to get a functioning login system + routes
 
+yuki == 2023-05-09 14:15
+- worked on JS again...
+
 ===============================
 
 emilyO -- 2023-05-10 12:45
@@ -77,5 +80,8 @@ emilyO -- 2023-05-10 13:00
 
 bread -- 2023-05-10 14:00
 - site map now fully works, a user is able to navigate around the website once logged in 
+
+yuki == 2023-05-10 12:03
+- worked on bootstrap for index + logout button
 
 ===============================
