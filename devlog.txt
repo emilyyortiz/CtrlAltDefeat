@@ -11,8 +11,6 @@ bread -- 2023-05-04 13:39
 - made api.py, tentatively
 - made db.py, tentatively
 
-===============================
-
 yuki -- 2023-05-04 13:45
 - made html files for index login and register
 
@@ -31,9 +29,45 @@ revisions to design doc:
 - consideration for how to store playlists
 - updated components and site map
 
+bread -- 2023-05-05 13:55
+- set out method requirements from API and DB
+- started pseudocode on site
+- tried to figure out cookies lol 
+
+yuki -- 2023-05-05 13:55
+- worked on index
+
 ===============================
 
 emilyO -- 2023-05-08 13:15
 - added button on login page and js that makes the button text change (to demo js linkage for hw)
+
+===============================
+
+bread -- 2023-05-08 14:04
+- outlined major skeleton for homepage
+
+===============================
+
+yuki -- 2023-05-08 12:05
+- worked on JS for search button
+- cleaned up index
+
+===============================
+
+emilyO -- 2023-05-09 14:05
+- worked on api_handle.py
+
+bread -- 2023-05-09 14:10
+- fixed some table_handle problems
+- continued trying to get a functioning login system + routes
+
+===============================
+
+emilyO -- 2023-05-10 12:45
+DATA CONDUIT
+- pull data from from api when a client performs a search
+- store data user wants to analyze in a db 
+- when analyzing data, use data from db
 
 ===============================

@@ -7,3 +7,10 @@ var textChange = function() {
 
 var dasbut = document.getElementById("b");
 dasbut.addEventListener('click', ()=>{textChange()});
+
+var loadButton = function(Button) {
+    
+    searchBtn.innerHTML = "Loading";
+}
+
+var searchBtn = document.getElementById("songSearchBtn");
