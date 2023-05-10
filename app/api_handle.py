@@ -44,8 +44,8 @@ def music_search(text):
         }
     # 56420303
 
-        response = requests.get(url, params=querystring).json()
-        print(response)
+    response = requests.get(url, params=querystring).json()
+    print(response)
 
     music_api("Blank Space")
 

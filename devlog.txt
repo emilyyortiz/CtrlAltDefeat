@@ -75,4 +75,7 @@ DATA CONDUIT
 emilyO -- 2023-05-10 13:00
 - updated requirements.txt, launch codes, and devlog for data handling
 
+bread -- 2023-05-10 14:00
+- site map now fully works, a user is able to navigate around the website once logged in 
+
 ===============================

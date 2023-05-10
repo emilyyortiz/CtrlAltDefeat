@@ -33,7 +33,9 @@ def make_account():
     return render_template('register.html', status='Username is in use!')
 
   #new entry
-  if (request.form.get('password') != request.form.get('password-confirm')):
+  print(request.form.get('password'))
+  print(request.form.get('password_confirm'))
+  if (request.form.get('password') != request.form.get('password_confirm')):
     return render_template('register.html', status='The passwords typed are not the same!')
   create_user(request.form.get('username'), request.form.get('password')) #NEED method to create an entry in the table
   session['username'] = request.form['username']
@@ -42,12 +44,18 @@ def make_account():
   
 @app.route('/auth', methods=['GET', 'POST'])
 def authenticate():
-  if not check_pass(request.form.get('username'), request.form.get('password')): #NEED method to take in a username and password and return if that entry exists
+  print(check_pass(request.form.get('username'), request.form.get('password')))
+  if check_pass(request.form.get('username'), request.form.get('password')): #NEED method to take in a username and password and return if that entry exists
   #if(False):
     return render_template('login.html', status='Incorrect login info')
   session['username'] = request.form['username']
   return redirect('/home')
 
+@app.route('/logout')
+  def logout():
+  session.pop('username')
+  return redirect('/')
+  
 #TODO: 
 #Display wordcloud on playlist  OUTLINED
 #Rip lyrics for wordcloud AND display  OUTLINED
@@ -55,14 +63,17 @@ def authenticate():
 #Play songs from button  OUTLINED
 #Search query entry from html, "entry" for the request
 
+#BIG ISSUE: 
+#Where do we put a song into the playlist? 
+
 #MAIN ISSUES: 
 #should the cover be updated every time the page is viewed? Seems intensive on the API
 @app.route('/home', methods=['GET', 'POST'])
 def home():
-    #maybe unnecessary? 
-    if ('username' in session):
-        return redirect('/')
-    return render_template('index.html')
+  #maybe unnecessary? 
+  if ('username' not in session):
+    return redirect('/')
+  return render_template('index.html')
 
 '''
 #returns a dictionary with the number of instances of each word in a playlist: 
