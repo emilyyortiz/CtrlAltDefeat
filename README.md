@@ -1,6 +1,6 @@
 # <Project Name> by CtrlAltDefeat
 
-## Roster with Roles
+## Roster
 * Emily Ortiz (PM)
 * Yuki Feng
 * Ryan Lee
@@ -21,6 +21,7 @@ git clone git@github.com:eortiz-30/CtrlAltDefeat.git
 How to run:
 ```
 cd CtrlAltDefeat
+pip install -r requirements.txt
 python app/__init__.py
 ```
 
