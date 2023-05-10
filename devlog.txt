@@ -11,8 +11,6 @@ bread -- 2023-05-04 13:39
 - made api.py, tentatively
 - made db.py, tentatively
 
-===============================
-
 yuki -- 2023-05-04 13:45
 - made html files for index login and register
 
@@ -63,5 +61,13 @@ emilyO -- 2023-05-09 14:05
 bread -- 2023-05-09 14:10
 - fixed some table_handle problems
 - continued trying to get a functioning login system + routes
+
+===============================
+
+emilyO -- 2023-05-10 12:45
+DATA CONDUIT
+- pull data from from api when a client performs a search
+- store data user wants to analyze in a db 
+- when analyzing data, use data from db
 
 ===============================
