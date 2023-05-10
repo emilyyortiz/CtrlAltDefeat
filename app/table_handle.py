@@ -9,13 +9,16 @@ c = db.cursor()
 
 db.executescript("""
 CREATE TABLE if not exists users(username text, password text);
-Insert into users values(?,?), ('Ryan', 'password');
+Insert into users values(?,?), ('admin', 'password');
 """)
 
 def db_connect():
     global db
     db = sqlite3.connect(DB_FILE)
     return db.cursor()
+
+#---------------------------------------------------------------------------#
+#LOGIN METHODS
 
 #Creates a new user.
 #Parameters: (text username, text password)
@@ -58,8 +61,19 @@ def check_pass(username, password):
         db.close()
         return False
 
-print(create_user('u','p'))
-print(check_user('u'))
-print(check_pass('u','p'))
+#----------------------------------------------------------------------------#
+#PLAYLIST METHODS
+#Adds username, song name, artist, lyrics to playlist nad assigns it an id
+#Parameters: (text uername, text song, text artist, text lyrics)
+#Returns nothing
+
+#def add_playlist(username, song, artist, lyrics):
+#    c=db.cursor()
+#    c.execute("Insert into playlist values(?,?,?,?,?)", (username, song, artist, lyrics))
+#    c.close()
+
+#print(create_user('u','p'))
+#print(check_user('u'))
+#print(check_pass('u','p'))
 #DB MANAGEMENT
 
