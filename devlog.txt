@@ -37,6 +37,9 @@ bread -- 2023-05-05 13:55
 yuki -- 2023-05-05 13:55
 - worked on index
 
+ryan -- 2023-05-05 13:55
+- made db methods for login
+
 ===============================
 
 emilyO -- 2023-05-08 13:15
@@ -48,6 +51,9 @@ bread -- 2023-05-08 14:04
 yuki -- 2023-05-08 14:05
 - worked on JS for search button
 - cleaned up index
+
+ryan -- 2023-05-08 14:13
+- tested login db methods and started db methods for playlist 
 
 ===============================
 
