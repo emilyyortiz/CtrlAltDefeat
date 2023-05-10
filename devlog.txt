@@ -42,14 +42,10 @@ yuki -- 2023-05-05 13:55
 emilyO -- 2023-05-08 13:15
 - added button on login page and js that makes the button text change (to demo js linkage for hw)
 
-===============================
-
 bread -- 2023-05-08 14:04
 - outlined major skeleton for homepage
 
-===============================
-
-yuki -- 2023-05-08 12:05
+yuki -- 2023-05-08 14:05
 - worked on JS for search button
 - cleaned up index
 
@@ -69,5 +65,8 @@ DATA CONDUIT
 - pull data from from api when a client performs a search
 - store data user wants to analyze in a db 
 - when analyzing data, use data from db
+
+emilyO -- 2023-05-10 13:00
+- updated requirements.txt, launch codes, and devlog for data handling
 
 ===============================
