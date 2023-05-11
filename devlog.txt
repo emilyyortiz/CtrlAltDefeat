@@ -85,4 +85,7 @@ bread -- 2023-05-10 14:00
 yuki == 2023-05-10 12:03
 - worked on bootstrap for index + logout button
 
+ryan -- 2023-05-10 23:55
+- finished most of playlist add
+
 ===============================
