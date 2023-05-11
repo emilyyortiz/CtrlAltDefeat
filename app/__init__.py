@@ -2,7 +2,7 @@ from flask import Flask, render_template, session, request, redirect
 import sqlite3
 import os #?
 #more imports for other files later
-from api_handle import *
+# from api_handle import *
 from table_handle import *
 
 
