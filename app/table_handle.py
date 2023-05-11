@@ -73,11 +73,11 @@ def check_pass(username, password):
 
 
 def add_playlist(idnumber, username, song, artist, lyrics):
-    c=db.cursor()
+    c=db_connect()
     c.execute("Insert into playlist values(?,?,?,?,?)", (idnumber, username, song, artist, lyrics))
     c.close()
     idnumber = idnumber + 1
-    
+    db.close()
 
 #print(create_user('u','p'))
 #print(check_user('u'))
