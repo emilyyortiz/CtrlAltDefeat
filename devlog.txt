@@ -95,5 +95,11 @@ bread -- 2023-05-11 14:05
   It keeps using an old table! 
 - Some troubleshooting, still working on login and also now on search functionality
 
+emilyO -- 2023-05-11 14:05
+- finish music_api() function in api_handle.py
+
 ryan -- 2023-05-11 14:15
 - finished playlist add and playlist remove and tested them
+
+emilyO -- 2023-05-11 16:35
+- found new api to use for wordcloud and explored it, made api kb card

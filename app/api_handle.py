@@ -116,13 +116,30 @@ def music_api(text):
     return output
 
 # music_api() test cases
-test = music_api("top of the world - shawn mendes")
-print(json.dumps(test, indent=2))
+# test = music_api("top of the world - shawn mendes")
+# test = music_api("hello")
+# print(json.dumps(test, indent=2))
 
+def wordcloud_api(text):
+    url = "https://quickchart.io/wordcloud"   
 
+    path = os.path.dirname(os.path.realpath(__file__)) # path to current python file
+    
+    key = open(path + "/keys/key_api0", "r").read()
+    key = key.strip()
+
+    querystring = {
+        "text": text  
+    }
+    print(response = requests.get(url, params=querystring).json())
+
+# wordcloud_api("to be or not to be that is the question")
 
 # to do list
 # we r supposed to show copyright lol
 # check musixmatch checklist
 # make sure i only get lyrics for songs with lyrics
 # error message in case api call is bad
+# post thing in case text input is too big
+
+# https://quickchart.io/documentation/word-cloud-api/
