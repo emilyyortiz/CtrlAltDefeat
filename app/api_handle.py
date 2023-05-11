@@ -64,6 +64,8 @@ def music_search(text):
         output.append(song_dict)
 
     return output
+    response = requests.get(url, params=querystring).json()
+    print(response)
 
 print(music_search("Blue Danube"))
 

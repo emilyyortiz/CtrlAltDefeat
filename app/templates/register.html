@@ -20,7 +20,7 @@
                           <img src = "../static/lyle.png" class="rounded mx-auto d-block" style = "height: 80px; width:80px">
                         </a>
                         <h3 class="login-heading m-3 text-center">Sign Up</h3>
-                        <form class="px-4 py-3" action ="/register" method="POST">
+                        <form class="px-4 py-3" action ="/signup" method="POST">
                           
                           <div class="form-floating m-3">
                             <input required type="text" class="form-control" name="username" id="form_user" placeholder="Username">
@@ -46,7 +46,7 @@
                       <div class="container-fluid text-center">
                         <p class="text-danger">{{status}}</p>
                         <p> Already have an account? </p> 
-                        <form action="/signup" method="GET">
+                        <form action="/auth" method="GET">
                           <button class="user_button btn btn-lg" value="login" name="sub1">Login</button>
                         </form>  
                       </div>  <!-- close login container -->

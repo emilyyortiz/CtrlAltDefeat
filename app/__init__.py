@@ -19,7 +19,7 @@ app.secret_key = os.urandom(32)
 def login():
     if 'username' in session: #when cookie work
     #if(False):
-        return redirect('/home')
+        return redirect('/home/pl')
     return render_template('login.html') #names subject to change
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -33,20 +33,30 @@ def make_account():
     return render_template('register.html', status='Username is in use!')
 
   #new entry
-  if (request.form.get('password') != request.form.get('password-confirm')):
+  print(request.form.get('password'))
+  print(request.form.get('password_confirm'))
+  if (request.form.get('password') != request.form.get('password_confirm')):
     return render_template('register.html', status='The passwords typed are not the same!')
   create_user(request.form.get('username'), request.form.get('password')) #NEED method to create an entry in the table
   session['username'] = request.form['username']
   print(session['username'])
-  return redirect('/home') #/home or /
+  return redirect('/home/pl') #/home or /
   
+#this method actually verifies whether or not the login works
 @app.route('/auth', methods=['GET', 'POST'])
 def authenticate():
-  if not check_pass(request.form.get('username'), request.form.get('password')): #NEED method to take in a username and password and return if that entry exists
+  print(check_pass(request.form.get('username'), request.form.get('password')))
+  if check_pass(request.form.get('username'), request.form.get('password')): #NEED method to take in a username and password and return if that entry exists
   #if(False):
     return render_template('login.html', status='Incorrect login info')
   session['username'] = request.form['username']
-  return redirect('/home')
+  return redirect('/home/pl')
+
+#forgot to actually allow a logout (I think it was in the site map)
+@app.route('/logout')
+def logout():
+  session.pop('username')
+  return redirect('/')
 
 #TODO: 
 #Display wordcloud on playlist  OUTLINED
@@ -55,61 +65,71 @@ def authenticate():
 #Play songs from button  OUTLINED
 #Search query entry from html, "entry" for the request
 
+#BIG ISSUE: 
+#Where do we put a song into the playlist? 
+
 #MAIN ISSUES: 
 #should the cover be updated every time the page is viewed? Seems intensive on the API
-@app.route('/home', methods=['GET', 'POST'])
-def home():
-    #maybe unnecessary? 
-    if ('username' in session):
-        return redirect('/')
-    return render_template('index.html')
+@app.route('/home/<song>', methods=['GET', 'POST'])
+def home(song):
+  #maybe unnecessary? 
+  if ('username' not in session):
+    return redirect('/')
+  return render_template('index.html')
 
 '''
-#returns a dictionary with the number of instances of each word in a playlist: 
-pl = [] #String array of songs in playlist
-dic = {string w : int num} #future dictoinary containing all words in playlist
+#if song is default playlist, wordcloud update is necessary
+if(song == "pl"):
+  #gets the playlist for this user
+  pl = get_playlist(session['username'])
 
-#SAVE INFORMATION AS JSON OR ARRAY?
-link = []  #string array of links to be used to play audio (if this becomes the used method)
-artist = []  #string array of artist names to be displayed
-current_song =  #necessary? pass in argument from form-action in HTML
+  #gets a dictionary with the number of instances of each word in a playlist: 
+  dic = {string w : int num} #future dictoinary containing all words in playlist
 
-#get playlist method, load into array, find song information
-for(song : playlist):
+  #INFORMATION IS ALL SAVED WITHIN THE PLAYLIST ARRAY OF DICTIONARIES
+  #link = []  #string array of links to be used to play audio (if this becomes the used method)
+  #artist = []  #string array of artist names to be displayed
+  current_song =  #necessary? pass in argument from form-action in HTML
 
-  lyric = get_lyrics(song)
-  #get lyric method
+  #get playlist method, load into array, find song information
+  for(songs : pl):
 
-  #ALSO GET MORE INFORMATION ABOUT THE SONG TO DISPLAY! (FROM API)
-  #artist name
-  #song name
-  #song link
-  link[].append(get_link(song))
+    lyric = get_lyrics(songs.get("name"))
+    #get lyric method
 
-  #parsing of a dictionary for wordcloud
-  for word in lyric.split(): #splits by spaces hopefully
-    if(lyric.get(word)==none):
-      lyric[word].append(1)
-    else:
-      lyric[word].update({word: lyric.get(word) + 1})
-      
-#wordcloud method
-cloud = get_cloud(lyric)
+    #ALSO GET MORE INFORMATION ABOUT THE SONG TO DISPLAY! (FROM API)
+    #artist name
+    #songs name
+    #songs link
+    #link[].append(songs.get("link")) #when links come into play
 
-return render_template('index.html', 
-word_cloud = cloud, 
-YTlinks = link, 
-playlist = pl, 
-artists = artist, 
-cur = current_song)
+    #parsing of a dictionary for wordcloud
+    for word in lyric.split(): #splits by spaces hopefully
+      if(dic.get(word)==none):
+        dic[word].append(1)
+      else:
+        dic[word].update({word: lyric.get(word) + 1})
+        
+  #wordcloud method
+  cloud = get_cloud(lyric)
 
-#PAGE TAKES: 
-# A image (?) type word cloud
-# An array of youtube links
-# An array of song names
-# An array of artist names
-# The current song being played
+  return render_template('index.html', 
+  word_cloud = cloud, 
+  YTlinks = link, 
+  playlist = pl, 
+  artists = artist, 
+  cur = current_song)
 
+  #PAGE TAKES: 
+  # A image (?) type word cloud
+  # An array of youtube links
+  # An array of song names
+  # An array of artist names
+  # The current song being played
+
+#if viewing a song not in playlist
+else:
+  current_song = get_song(song)
 '''
 
 if __name__ == '__main__':

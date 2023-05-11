@@ -10,20 +10,25 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     </head>
     <body>
+        <div class="d-flex flex-row-reverse bg-success-subtle p-2">
+            <form action="/logout" method="GET">
+                <button class="btn btn-outline-dark" value="logout"> Logout </button>
+            </form>
+        </div>
         <div class="container-fluid"> 
-            <div class="row">
-                <div class="col-3">
-                    <img src="../static/lyle.png" width="400px">
+            <div class="row d-flex align-items-center justify-content-center">
+                <div class="col-4">
+                    <img src="../static/lyle.png" width="120%">
                 </div>
-                <div class="col-9 text-center">
-                    <h1>La La Lyle</h1>
+                <div class="col-8">
+                    <h1 class="text-center text-success-emphasis">La La Lyle</h1>
                 </div>
             </div>
         </div>
-        <div class="container-fluid">
+        <div class="container-fluid bg-success-subtle p-4">
             <div class="row">
-                <div class="col-4 text-center">
-                    <h2>Playlists</h2>
+                <div class="col-4">
+                    <h2 class="text-center text-success-emphasis">Playlists</h2>
                 </div>
                 <div class="col-8">
                     <p> Welcome to La La Lyle, Team Ctrl+Alt+Defeat's Karaoke website
@@ -43,10 +48,8 @@
                         <input type="text" class="form-control" id="artistInput" placeholder="Shawn Mendes">
                     </div>
                     <div class="form-group row mb-4">
-                        <button type="submit" class="btn btn-success align-items-center" id="songSearchBtn">Search</button>
-                        <button class="btn btn-primary" type="button" disabled>
-                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                            Loading...
+                        <button type="submit" class="btn btn-outline-dark">
+                            <span id="search">Search</span>
                         </button>
                     </div>
                     
