@@ -65,17 +65,35 @@ def check_pass(username, password):
 
 #----------------------------------------------------------------------------#
 #PLAYLIST METHODS
+
+
 #Adds username, song name, artist, lyrics to playlist nad assigns it an id
 #Parameters: (text uername, text song, text artist, text lyrics)
 #Returns nothing
-
-
 def add_playlist(username, song, artist, lyrics):
     c=db_connect()
     c.execute("Insert into playlist values(?,?,?,?)", (username, song, artist, lyrics))
     c.close()
     db.commit()
     db.close()
+
+#Removes row in playlist column with username and song name
+#Parameters: (text uername, text song)
+#Returns true if table has been deleted
+def remove_playlist(username, song):
+    c=db_connect()
+    c.execute("Select * from playlist where username = ? and song = ?", (username, song))
+    out = 'Deleted the object'
+    if(c.fetchone() == None):
+        out = 'Username and song does not exist in db'
+    c.execute("Delete from playlist where username = ? and song = ?", (username, song))
+    c.close()
+    db.commit()
+    db.close()
+    return out
+
+
+
 
 
 
@@ -84,4 +102,5 @@ def add_playlist(username, song, artist, lyrics):
 #print(check_pass('u','p'))
 add_playlist('ryan', 'abc', 'a', 'abcdefghijklmnopqrstuvwxyz')
 add_playlist('ryan', 'a', 'a', 'a')
+print(remove_playlist('ryan', 'ab'))
 #DB MANAGEMENT
