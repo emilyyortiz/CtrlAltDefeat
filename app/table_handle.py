@@ -1,6 +1,9 @@
 import sqlite3
 #rename maybe for playlist pizzaz
 
+global idnumber
+idnumber = 1
+
 DB_FILE = "database.db"
 
 db = None
@@ -10,6 +13,7 @@ c = db.cursor()
 db.executescript("""
 CREATE TABLE if not exists users(username text, password text);
 Insert into users values(?,?), ('admin', 'password');
+CREATE TABLE if not exists playlist(id int, username text, song text, artist text, lyrics text);
 """)
 
 def db_connect():
@@ -67,13 +71,18 @@ def check_pass(username, password):
 #Parameters: (text uername, text song, text artist, text lyrics)
 #Returns nothing
 
-#def add_playlist(username, song, artist, lyrics):
-#    c=db.cursor()
-#    c.execute("Insert into playlist values(?,?,?,?,?)", (username, song, artist, lyrics))
-#    c.close()
+
+def add_playlist(idnumber, username, song, artist, lyrics):
+    c=db_connect()
+    c.execute("Insert into playlist values(?,?,?,?,?)", (idnumber, username, song, artist, lyrics))
+    c.close()
+    idnumber = idnumber + 1
+    db.close()
 
 #print(create_user('u','p'))
 #print(check_user('u'))
 #print(check_pass('u','p'))
+add_playlist(idnumber,'ryan', 'abc', 'a', 'abcdefghijklmnopqrstuvwxyz')
+add_playlist(idnumber,'ryan', 'a', 'a', 'a')
 #DB MANAGEMENT
 

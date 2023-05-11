@@ -80,8 +80,12 @@ emilyO -- 2023-05-10 13:00
 
 bread -- 2023-05-10 14:00
 - site map now fully works, a user is able to navigate around the website once logged in 
+- started to create a system to view songs not in playlist from a search, allowing new songs to be put ins
 
 yuki == 2023-05-10 12:03
 - worked on bootstrap for index + logout button
+
+ryan -- 2023-05-10 23:55
+- finished most of playlist add
 
 ===============================
