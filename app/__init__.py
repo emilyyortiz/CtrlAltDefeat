@@ -2,11 +2,12 @@ from flask import Flask, render_template, session, request, redirect
 import sqlite3
 import os #?
 #more imports for other files later
-# from api_handle import *
+from api_handle import *
 from table_handle import *
 
 
 app = Flask(__name__)
+app.app_context().push()
 
 #for later
 app.secret_key = os.urandom(32)
@@ -19,7 +20,7 @@ app.secret_key = os.urandom(32)
 def login():
     if 'username' in session: #when cookie work
     #if(False):
-        return redirect('/home/pl')
+        return redirect('/home')
     return render_template('login.html') #names subject to change
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -37,20 +38,22 @@ def make_account():
   print(request.form.get('password_confirm'))
   if (request.form.get('password') != request.form.get('password_confirm')):
     return render_template('register.html', status='The passwords typed are not the same!')
+  print("register " + request.form.get('username') + " " + request.form.get('password'))
   create_user(request.form.get('username'), request.form.get('password')) #NEED method to create an entry in the table
   session['username'] = request.form['username']
   print(session['username'])
-  return redirect('/home/pl') #/home or /
+  return redirect('/home') #/home or /
   
 #this method actually verifies whether or not the login works
 @app.route('/auth', methods=['GET', 'POST'])
 def authenticate():
   print(check_pass(request.form.get('username'), request.form.get('password')))
-  if check_pass(request.form.get('username'), request.form.get('password')): #NEED method to take in a username and password and return if that entry exists
+  print("login " + request.form.get('username') + " " + request.form.get('password'))
+  if not (check_pass(request.form.get('username'), request.form.get('password'))): #NEED method to take in a username and password and return if that entry exists
   #if(False):
     return render_template('login.html', status='Incorrect login info')
   session['username'] = request.form['username']
-  return redirect('/home/pl')
+  return redirect('/home')
 
 #forgot to actually allow a logout (I think it was in the site map)
 @app.route('/logout')
@@ -70,16 +73,18 @@ def logout():
 
 #MAIN ISSUES: 
 #should the cover be updated every time the page is viewed? Seems intensive on the API
-@app.route('/home/<song>', methods=['GET', 'POST'])
-def home(song):
+@app.route('/home', methods=['GET', 'POST'])
+def home():
   #maybe unnecessary? 
   if ('username' not in session):
     return redirect('/')
   return render_template('index.html')
 
+search = request.form['songInput']
+
 '''
 #if song is default playlist, wordcloud update is necessary
-if(song == "pl"):
+if(search == "pl"):
   #gets the playlist for this user
   pl = get_playlist(session['username'])
 
@@ -92,16 +97,16 @@ if(song == "pl"):
   current_song =  #necessary? pass in argument from form-action in HTML
 
   #get playlist method, load into array, find song information
-  for(songs : pl):
+  for(song : pl):
 
-    lyric = get_lyrics(songs.get("name"))
+    lyric = get_lyrics(song.get("name"))
     #get lyric method
 
     #ALSO GET MORE INFORMATION ABOUT THE SONG TO DISPLAY! (FROM API)
     #artist name
-    #songs name
-    #songs link
-    #link[].append(songs.get("link")) #when links come into play
+    #song name
+    #song link
+    #link[].append(song.get("link")) #when links come into play
 
     #parsing of a dictionary for wordcloud
     for word in lyric.split(): #splits by spaces hopefully

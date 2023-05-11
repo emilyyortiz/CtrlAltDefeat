@@ -89,3 +89,11 @@ ryan -- 2023-05-10 23:55
 - finished most of playlist add
 
 ===============================
+
+bread -- 2023-05-11 14:05
+- For some reason sqlite is not udpating the tables! This is really pissing me off!
+  It keeps using an old table! 
+- Some troubleshooting, still working on login and also now on search functionality
+
+ryan -- 2023-05-11 14:15
+- finished playlist add and playlist remove and tested them

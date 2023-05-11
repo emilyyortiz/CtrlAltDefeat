@@ -7,12 +7,10 @@
 
 // var dasbut = document.getElementById("b");
 // dasbut.addEventListener('click', ()=>{textChange()});
-
+const searchSong = document.getElementById("b");
+searchSong.addEventListener("click", loadButton);
 
 var loadButton = function() {
-    var span = document.getElementById("search");
-    span.innerHTML = "Loading";
+    document.getElementById("search").innerHTML = "Loading";
+    console.log("working");
 }
-
-var songSearch = document.getElementById("search");
-songSearch.addEventListener('click', ()=>{loadButton()});

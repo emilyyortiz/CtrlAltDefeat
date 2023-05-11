@@ -1,9 +1,6 @@
 import sqlite3
 #rename maybe for playlist pizzaz
 
-global idnumber
-idnumber = 1
-
 DB_FILE = "database.db"
 
 db = None
@@ -13,7 +10,7 @@ c = db.cursor()
 db.executescript("""
 CREATE TABLE if not exists users(username text, password text);
 Insert into users values(?,?), ('admin', 'password');
-CREATE TABLE if not exists playlist(id int, username text, song text, artist text, lyrics text);
+CREATE TABLE if not exists playlist(username text, song text, artist text, lyrics text);
 """)
 
 def db_connect():
@@ -31,6 +28,7 @@ def create_user(username, password):
     c=db_connect()
     c.execute("Insert into users values(?,?)", (username, password))
     c.close()
+    db.commit()
     db.close()
 
 #Checks if a username exists in the user table
@@ -67,22 +65,42 @@ def check_pass(username, password):
 
 #----------------------------------------------------------------------------#
 #PLAYLIST METHODS
+
+
 #Adds username, song name, artist, lyrics to playlist nad assigns it an id
 #Parameters: (text uername, text song, text artist, text lyrics)
 #Returns nothing
-
-
-def add_playlist(idnumber, username, song, artist, lyrics):
+def add_playlist(username, song, artist, lyrics):
     c=db_connect()
-    c.execute("Insert into playlist values(?,?,?,?,?)", (idnumber, username, song, artist, lyrics))
+    c.execute("Insert into playlist values(?,?,?,?)", (username, song, artist, lyrics))
     c.close()
-    idnumber = idnumber + 1
+    db.commit()
     db.close()
+
+#Removes row in playlist column with username and song name
+#Parameters: (text uername, text song)
+#Returns true if table has been deleted
+def remove_playlist(username, song):
+    c=db_connect()
+    c.execute("Select * from playlist where username = ? and song = ?", (username, song))
+    out = 'Deleted the object'
+    if(c.fetchone() == None):
+        out = 'Username and song does not exist in db'
+    c.execute("Delete from playlist where username = ? and song = ?", (username, song))
+    c.close()
+    db.commit()
+    db.close()
+    return out
+
+
+
+
+
 
 #print(create_user('u','p'))
 #print(check_user('u'))
 #print(check_pass('u','p'))
-add_playlist(idnumber,'ryan', 'abc', 'a', 'abcdefghijklmnopqrstuvwxyz')
-add_playlist(idnumber,'ryan', 'a', 'a', 'a')
+add_playlist('ryan', 'abc', 'a', 'abcdefghijklmnopqrstuvwxyz')
+add_playlist('ryan', 'a', 'a', 'a')
+print(remove_playlist('ryan', 'ab'))
 #DB MANAGEMENT
-
