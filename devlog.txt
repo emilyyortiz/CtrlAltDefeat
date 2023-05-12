@@ -103,3 +103,8 @@ ryan -- 2023-05-11 14:15
 
 emilyO -- 2023-05-11 16:35
 - found new api to use for wordcloud and explored it, made api kb card
+
+===============================
+
+ryan -- 2023-05-12 13:54
+- finished the method that returns a user's playlist

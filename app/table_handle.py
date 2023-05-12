@@ -92,8 +92,24 @@ def remove_playlist(username, song):
     db.close()
     return out
 
-
-
+#Takes a username and gives a tuple that contains the songs, artist, and lyrics
+#Parameters: (text username)
+#Returns a tuple
+def user_playlist(username):
+    c=db_connect()
+    c.execute("Select * from playlist where username = ?", (username,))
+    data = c.fetchall()
+    songs = []
+    artists = []
+    lyrics = []
+    for i in data:
+        songs.append(i[1])
+        artists.append(i[2])
+        lyrics.append(i[3])
+    c.close()
+    db.commit()
+    db.close()
+    return (songs, artists, lyrics)
 
 
 
@@ -102,5 +118,8 @@ def remove_playlist(username, song):
 #print(check_pass('u','p'))
 add_playlist('ryan', 'abc', 'a', 'abcdefghijklmnopqrstuvwxyz')
 add_playlist('ryan', 'a', 'a', 'a')
-print(remove_playlist('ryan', 'ab'))
+add_playlist('admin', 'b', 'b', 'b')
+#print(remove_playlist('ryan', 'ab'))
+print(user_playlist('ryan'))
+print(user_playlist('admin'))
 #DB MANAGEMENT
