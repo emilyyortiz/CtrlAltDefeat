@@ -11,7 +11,7 @@
     </head>
     <body>
         <div class="d-flex flex-row-reverse bg-success-subtle p-2">
-            <form action="/login" method="GET">
+            <form action="/" method="GET">
                 <button class="btn btn-outline-dark" value="logout"> Logout </button>
             </form>
         </div>
@@ -39,15 +39,17 @@
                         Karoake session!
                     </p>
 
-                    <div class = "form-group row mb-4">
-                        <label for="Song and Artist">Song - Artist</label>
-                        <input type="text" class="form-control" id="songInput" placeholder="Top of the World - Shawn Mendes">
-                    </div>
-                    <div class="form-group row mb-4">
-                        <button type="submit" class="btn btn-outline-success" id="b">
-                            <span id="search">Search</span>
-                        </button>
-                    </div>
+                    <form action="/search" method="POST">
+                        <div class = "form-group row mb-4">
+                            <label for="Song and Artist">Song - Artist</label>
+                            <input type="text" class="form-control" name="songInput" id="songInput" placeholder="Top of the World - Shawn Mendes">
+                        </div>
+                        <div class="form-group row mb-4">
+                           <button type="submit" class="btn btn-outline-success" id="b">
+                                <span id="search">Search</span>
+                            </button>
+                       </div>
+                    </form>
                     
                 </div> 
             </div>
