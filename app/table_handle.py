@@ -112,14 +112,14 @@ def user_playlist(username):
     return (songs, artists, lyrics)
 
 
-
+#tests
 #print(create_user('u','p'))
 #print(check_user('u'))
 #print(check_pass('u','p'))
-add_playlist('ryan', 'abc', 'a', 'abcdefghijklmnopqrstuvwxyz')
-add_playlist('ryan', 'a', 'a', 'a')
-add_playlist('admin', 'b', 'b', 'b')
+#add_playlist('ryan', 'abc', 'a', 'abcdefghijklmnopqrstuvwxyz')
+#add_playlist('ryan', 'a', 'a', 'a')
+#add_playlist('admin', 'b', 'b', 'b')
 #print(remove_playlist('ryan', 'ab'))
-print(user_playlist('ryan'))
-print(user_playlist('admin'))
+#print(user_playlist('ryan'))
+#print(user_playlist('admin'))
 #DB MANAGEMENT
