@@ -108,3 +108,8 @@ emilyO -- 2023-05-11 16:35
 
 ryan -- 2023-05-12 13:54
 - finished the method that returns a user's playlist
+
+===============================
+
+ryan -- 2023-05-15 14:09
+- Checked methods in table handle for error handling

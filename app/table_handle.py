@@ -25,11 +25,15 @@ def db_connect():
 #Parameters: (text username, text password)
 #Returns nothing
 def create_user(username, password):
-    c=db_connect()
-    c.execute("Insert into users values(?,?)", (username, password))
-    c.close()
-    db.commit()
-    db.close()
+    try:
+        c=db_connect()
+        c.execute("Insert into users values(?,?)", (username, password))
+        c.close()
+        db.commit()
+        db.close()
+        print('User has been successfully created')
+    except:
+        print('User has not been created successfully')
 
 #Checks if a username exists in the user table
 #Parameters: (text username)
@@ -71,11 +75,18 @@ def check_pass(username, password):
 #Parameters: (text uername, text song, text artist, text lyrics)
 #Returns nothing
 def add_playlist(username, song, artist, lyrics):
-    c=db_connect()
-    c.execute("Insert into playlist values(?,?,?,?)", (username, song, artist, lyrics))
-    c.close()
-    db.commit()
-    db.close()
+    if(check_user(username) == False):
+        print('Song has not been successfully added. Username does not exist in user database')
+    else:
+        try:
+            c=db_connect()
+            c.execute("Insert into playlist values(?,?,?,?)", (username, song, artist, lyrics))
+            c.close()
+            db.commit()
+            db.close()
+            print('Song has successfully been added')
+        except:
+            print('Song has not been successfully added')
 
 #Removes row in playlist column with username and song name
 #Parameters: (text uername, text song)
@@ -83,9 +94,9 @@ def add_playlist(username, song, artist, lyrics):
 def remove_playlist(username, song):
     c=db_connect()
     c.execute("Select * from playlist where username = ? and song = ?", (username, song))
-    out = 'Deleted the object'
+    out = 'Successfully deleted the object'
     if(c.fetchone() == None):
-        out = 'Username and song does not exist in db'
+        out = 'Username or song does not exist in playlist database'
     c.execute("Delete from playlist where username = ? and song = ?", (username, song))
     c.close()
     db.commit()
@@ -96,30 +107,40 @@ def remove_playlist(username, song):
 #Parameters: (text username)
 #Returns a tuple
 def user_playlist(username):
-    c=db_connect()
-    c.execute("Select * from playlist where username = ?", (username,))
-    data = c.fetchall()
-    songs = []
-    artists = []
-    lyrics = []
-    for i in data:
-        songs.append(i[1])
-        artists.append(i[2])
-        lyrics.append(i[3])
-    c.close()
-    db.commit()
-    db.close()
-    return (songs, artists, lyrics)
+    if(check_user(username) == False):
+        return('Cannot show a playlist. Username does not exist in user database')
+    else:
+        c=db_connect()
+        c.execute("Select * from playlist where username = ?", (username,))
+        try:
+            data = c.fetchall()
+            songs = []
+            artists = []
+            lyrics = []
+            for i in data:
+                songs.append(i[1])
+                artists.append(i[2])
+                lyrics.append(i[3])
+            c.close()
+            db.commit()
+            db.close()
+            return (songs, artists, lyrics)
+        except:
+            return ('Something is wrong with the playlist')
 
 
 #tests
-#print(create_user('u','p'))
-#print(check_user('u'))
-#print(check_pass('u','p'))
-#add_playlist('ryan', 'abc', 'a', 'abcdefghijklmnopqrstuvwxyz')
-#add_playlist('ryan', 'a', 'a', 'a')
-#add_playlist('admin', 'b', 'b', 'b')
-#print(remove_playlist('ryan', 'ab'))
-#print(user_playlist('ryan'))
-#print(user_playlist('admin'))
+'''
+create_user('u','p')#user has been successfully created
+print(check_user('u'))#true
+print(check_user('a'))#false
+print(check_pass('u','p'))#true
+print(check_pass('u','pa'))#false
+add_playlist('ryan', 'abc', 'a', 'abcdefghijklmnopqrstuvwxyz')#Song has not been successfully added. Username does not exist in user database
+add_playlist('admin', 'b', 'b', 'b')#Song has successfully been added
+print(remove_playlist('admin', 'b'))#Successfully deleted the object
+print(remove_playlist('ryan', 'ab'))#Username or song does not exist in playlist database
+print(user_playlist('ryan'))#Cannot show a playlist. Username does not exist in user database
+print(user_playlist('admin'))#Displays the tuple
+'''
 #DB MANAGEMENT
