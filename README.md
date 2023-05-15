@@ -1,4 +1,4 @@
-# <Project Name> by CtrlAltDefeat
+# Crocodile Covers by CtrlAltDefeat
 
 ## Roster
 * Emily Ortiz (PM)
@@ -7,10 +7,12 @@
 * Brian Wang
 
 ## Description
-Lyle, Lyle, Crocodile 🐊 🎤 🎶
+Inspired by Lyle, Lyle, Crocodile 🐊 🎤 🎶 ...
+Visit our site to search for songs, build a playlist, and then see a wordcloud of lyrics from that playlist!
 
 ## APIs Used
-* Add links to card in API KB
+* [musiXmatch](https://github.com/stuy-softdev/notes-and-code/blob/main/api_kb/411_on_musiXmatch.md)
+* [Word Cloud API](https://github.com/stuy-softdev/notes-and-code/blob/main/api_kb/411_on_WordCloudAPI.md)
 
 ## Launch Codes
 Visit our website:   
