@@ -34,6 +34,7 @@ def music_search(text):
     
     key = open(path + "/keys/key_api0", "r").read()
     key = key.strip()
+    # key = "test"
 
     querystring = {
         "apikey": key,
@@ -46,23 +47,26 @@ def music_search(text):
     response = requests.get(url, params=querystring).json()
     # print(json.dumps(response, indent=2))
 
-    # array where each element is a dictionary representing a song
-    track_list = response["message"]["body"]["track_list"]
-    # print(json.dumps(track_list, indent=2))
+    if(response["message"]["header"]["status_code"] == 200):
+        # array where each element is a dictionary representing a song
+        track_list = response["message"]["body"]["track_list"]
+        # print(json.dumps(track_list, indent=2))
+        
+        output = []
+
+        # pick specific data from each song dictionary
+        for i in range(len(track_list)):
+            song_data = track_list[i]["track"] # dict with all data for one song
+            # print(json.dumps(song_data, indent=2))
+            song_dict = {}
+            song_dict["id"] = song_data["track_id"]
+            song_dict["title"] = song_data["track_name"]
+            song_dict["artist"] = song_data["artist_name"]
+            output.append(song_dict)
+
+        return output
     
-    output = []
-
-    # pick specific data from each song dictionary
-    for i in range(len(track_list)):
-        song_data = track_list[i]["track"] # dict with all data for one song
-        # print(json.dumps(song_data, indent=2))
-        song_dict = {}
-        song_dict["id"] = song_data["track_id"]
-        song_dict["title"] = song_data["track_name"]
-        song_dict["artist"] = song_data["artist_name"]
-        output.append(song_dict)
-
-    return output
+    return 'error'
 
 # music_search() test cases ==============================================================
 # print("title")
@@ -94,6 +98,8 @@ def music_search(text):
 # }
 def music_api(text):
     output = music_search(text) # array of dicts, each containing song id, title, artist
+    if (output == 'error'):
+        return 'error'
 
     url = "https://api.musixmatch.com/ws/1.1/track.lyrics.get?"
 
@@ -101,6 +107,7 @@ def music_api(text):
     
     key = open(path + "/keys/key_api0", "r").read()
     key = key.strip()
+    # key = "test"
 
     for i in range(len(output)):
         querystring = {
@@ -111,13 +118,17 @@ def music_api(text):
         response = requests.get(url, params=querystring).json()
         # print(json.dumps(response, indent=2))
 
-        output[i]["lyrics"] = response["message"]["body"]["lyrics"]["lyrics_body"]
+        if (response["message"]["header"]["status_code"] == 200):
+            output[i]["lyrics"] = response["message"]["body"]["lyrics"]["lyrics_body"]
+        else:
+            return 'error'
 
     return output
 
 # music_api() test cases
 # test = music_api("top of the world - shawn mendes")
 # test = music_api("hello")
+# print(test)
 # print(json.dumps(test, indent=2))
 
 def wordcloud_api(text):

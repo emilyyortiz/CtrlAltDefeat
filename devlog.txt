@@ -111,5 +111,8 @@ ryan -- 2023-05-12 13:54
 
 ===============================
 
-ryan -- 2023-05-15 14:09
+ryan -- 2023-05-15 14:00
 - Checked methods in table handle for error handling
+
+emilyO -- 2023-05-15 14:00
+- added error handling for music_api() in api_handle.py
