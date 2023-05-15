@@ -116,3 +116,6 @@ ryan -- 2023-05-15 14:00
 
 emilyO -- 2023-05-15 14:00
 - added error handling for music_api() in api_handle.py
+
+bread -- 2023-05-15 14:41
+- homepage is now able to go from a song entered into the searchbar to returning the information about the song entered

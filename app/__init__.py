@@ -81,73 +81,100 @@ def query():
 
 #MAIN ISSUES: 
 #should the cover be updated every time the page is viewed? Seems intensive on the API
-@app.route('/home/<query>', methods=['GET', 'POST'])
-def home(query):
+@app.route('/home/<que>', methods=['GET', 'POST'])
+def home(que):
+
+  #queri = request.args.get('que')
   #maybe unnecessary? 
   if ('username' not in session):
     return redirect('/')
+  
+
+  else: 
+    current_song = None
+    search_res = None
+
+
+    #if song is default playlist, wordcloud update is necessary
+    if(que == "pl"):
+      print("\n\nplaylist stuff: ")
+      #gets the playlist for this user
+      pl = user_playlist(session['username'])
+      print(pl)
+      print(len(pl))
+
+      '''
+      #collective lyrics
+      lyrics = ""
+
+      #INFORMATION IS ALL SAVED WITHIN THE PLAYLIST ARRAY OF DICTIONARIES
+      #link = []  #string array of links to be used to play audio (if this becomes the used method)
+      #artist = []  #string array of artist names to be displayed
+      current_song = pl[0] #necessary? pass in argument from form-action in HTML
+
+      #get playlist method, load into array, find song information
+      
+      for(song in pl[0]):
+
+        lyric = get_lyrics(song.get("name"))
+        #get lyric method
+
+        #ALSO GET MORE INFORMATION ABOUT THE SONG TO DISPLAY! (FROM API)
+        #artist name
+        #song name
+        #song link
+        #link[].append(song.get("link")) #when links come into play
+
+        #parsing of a dictionary for wordcloud
+        for word in lyric.split(): #splits by spaces hopefully
+          if(dic.get(word)==none):
+            dic[word].append(1)
+          else:
+            dic[word].update({word: lyric.get(word) + 1})
+            
+      #wordcloud method
+      cloud = get_cloud(lyric)
+
+      return render_template('index.html', 
+      word_cloud = cloud, 
+      YTlinks = link, 
+      playlist = pl, 
+      artists = artist, 
+      cur = current_song)
+
+      #PAGE TAKES: 
+      # A image (?) type word cloud
+      # An array of youtube links
+      # An array of song names
+      # An array of artist names
+      # The current song being played
+    '''
+    #if viewing a song not in playlist
+    else:
+      print("\n\n DEBUG: \n Query: ")
+      print(que)
+      search_res = music_api(que)
+      current_song = search_res[0]
+      print("cursong: ")
+      print(current_song)
+      #print("full search: " + music_api(query))
+      #reference: 
+      # {
+      # "id": 247221810,
+      # "title": "Top Of The World",
+      # "artist": "Shawn Mendes",
+      # "lyrics": "<insert lyrics here>"}
+      # }
+
+      #test_cloud = wordcloud_api(current_song.get('lyrics'))
+      #print("\n\ncloud: " )
+      #print(test_cloud)
+
+
+
+
   return render_template('index.html')
 
-  print(query)
-
-
-#if song is default playlist, wordcloud update is necessary
-if(query == "pl"):
-  #gets the playlist for this user
-  pl = user_playlist(session['username'])
-  print(pl)
-  print(len(pl))
-
-  '''
-  #collective lyrics
-  lyrics = ""
-
-  #INFORMATION IS ALL SAVED WITHIN THE PLAYLIST ARRAY OF DICTIONARIES
-  #link = []  #string array of links to be used to play audio (if this becomes the used method)
-  #artist = []  #string array of artist names to be displayed
-  current_song = pl[0] #necessary? pass in argument from form-action in HTML
-
-  #get playlist method, load into array, find song information
-  
-  for(song in pl[0]):
-
-    lyric = get_lyrics(song.get("name"))
-    #get lyric method
-
-    #ALSO GET MORE INFORMATION ABOUT THE SONG TO DISPLAY! (FROM API)
-    #artist name
-    #song name
-    #song link
-    #link[].append(song.get("link")) #when links come into play
-
-    #parsing of a dictionary for wordcloud
-    for word in lyric.split(): #splits by spaces hopefully
-      if(dic.get(word)==none):
-        dic[word].append(1)
-      else:
-        dic[word].update({word: lyric.get(word) + 1})
-        
-  #wordcloud method
-  cloud = get_cloud(lyric)
-
-  return render_template('index.html', 
-  word_cloud = cloud, 
-  YTlinks = link, 
-  playlist = pl, 
-  artists = artist, 
-  cur = current_song)
-
-  #PAGE TAKES: 
-  # A image (?) type word cloud
-  # An array of youtube links
-  # An array of song names
-  # An array of artist names
-  # The current song being played
-
-#if viewing a song not in playlist
-else:
-  current_song = get_song(song)
-'''
 
 if __name__ == '__main__':
     app.debug = True
