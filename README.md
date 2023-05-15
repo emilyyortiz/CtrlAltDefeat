@@ -7,7 +7,7 @@
 * Brian Wang
 
 ## Description
-Inspired by Lyle, Lyle, Crocodile 🐊 🎤 🎶 ...
+Inspired by Lyle, Lyle, Crocodile 🐊 🎤 🎶 ...  
 Visit our site to search for songs, build a playlist, and then see a wordcloud of lyrics from that playlist!
 
 ## APIs Used
