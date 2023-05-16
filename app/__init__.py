@@ -93,45 +93,50 @@ def home(que):
   else: 
     current_song = None
     search_res = None
+    #collective lyrics
+    lyrics = ""
 
 
     #if song is default playlist, wordcloud update is necessary
     if(que == "pl"):
+
+      #playlist population test
+      #add_playlist(session['username'], "test", "tester", "testtesttest")
+
+
       print("\n\nplaylist stuff: ")
       #gets the playlist for this user
       pl = user_playlist(session['username'])
       print(pl)
-      print(len(pl))
+      #print(len(pl))
 
-      '''
-      #collective lyrics
-      lyrics = ""
-
-      #INFORMATION IS ALL SAVED WITHIN THE PLAYLIST ARRAY OF DICTIONARIES
-      #link = []  #string array of links to be used to play audio (if this becomes the used method)
-      #artist = []  #string array of artist names to be displayed
-      current_song = pl[0] #necessary? pass in argument from form-action in HTML
+      #INFORMATION IS ALL SAVED WITHIN THE PLAYLIST TUPLE OF ARRAYS
 
       #get playlist method, load into array, find song information
       
-      for(song in pl[0]):
+      for num in range(len(pl[0])):
 
-        lyric = get_lyrics(song.get("name"))
+        #Explaining structure for future reference: 
+          #The title of the song is the i-th element in the first array of the playlist tuple
+          #The current song element is the first element of the returned search
+        current_song = music_api(pl[0][num])[0]
         #get lyric method
-
+        lyrics += current_song.get('lyrics')
+        #lyrics test  
+        #print("COMBINED LYRICS: " + lyrics)
+        
         #ALSO GET MORE INFORMATION ABOUT THE SONG TO DISPLAY! (FROM API)
         #artist name
         #song name
         #song link
         #link[].append(song.get("link")) #when links come into play
 
-        #parsing of a dictionary for wordcloud
-        for word in lyric.split(): #splits by spaces hopefully
-          if(dic.get(word)==none):
-            dic[word].append(1)
-          else:
-            dic[word].update({word: lyric.get(word) + 1})
-            
+      #clean string (later)
+      lyrics = lyrics.replace("******* This Lyrics is NOT for Commercial use *******", " ")
+      lyrics = lyrics.replace("...", " ")
+      lyrics = lyrics.replace("\\n", " ")
+      print("COMBINED LYRICS " + lyrics)
+      '''      
       #wordcloud method
       cloud = get_cloud(lyric)
 
@@ -141,6 +146,7 @@ def home(que):
       playlist = pl, 
       artists = artist, 
       cur = current_song)
+      '''
 
       #PAGE TAKES: 
       # A image (?) type word cloud
@@ -148,7 +154,7 @@ def home(que):
       # An array of song names
       # An array of artist names
       # The current song being played
-    '''
+    
     #if viewing a song not in playlist
     else:
       print("\n\n DEBUG: \n Query: ")
@@ -166,12 +172,16 @@ def home(que):
       # "lyrics": "<insert lyrics here>"}
       # }
 
+      #test adds all searched songs to playlist 
+      #add_playlist(session['username'], current_song['title'], current_song['artist'], current_song['lyrics'])
+
       #test_cloud = wordcloud_api(current_song.get('lyrics'))
       #print("\n\ncloud: " )
       #print(test_cloud)
 
 
-
+  #WORD CLOUD TEST
+  print("WORD CLOUD: \n\n https://quickchart.io/wordcloud?text=" + lyrics)
 
   return render_template('index.html')
 

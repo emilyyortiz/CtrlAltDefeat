@@ -122,3 +122,9 @@ bread -- 2023-05-15 14:41
 
 yuki -- 2023-05-16 2:07
 - tried to launch on flask app running into module errors 
+
+===============================
+
+bread -- 2023-05-16 14:05
+- Playlist methods now incorporated into __init__, only thing missing is the place to dump the info
+- May be defunct, need to run venv
