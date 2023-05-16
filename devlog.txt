@@ -119,3 +119,6 @@ emilyO -- 2023-05-15 14:00
 
 bread -- 2023-05-15 14:41
 - homepage is now able to go from a song entered into the searchbar to returning the information about the song entered
+
+yuki -- 2023-05-16 2:07
+- tried to launch on flask app running into module errors 
