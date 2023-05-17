@@ -104,6 +104,7 @@ ryan -- 2023-05-11 14:15
 emilyO -- 2023-05-11 16:35
 - found new api to use for wordcloud and explored it, made api kb card
 
+<<<<<<< Updated upstream
 ===============================
 
 ryan -- 2023-05-12 13:54
@@ -128,3 +129,9 @@ yuki -- 2023-05-16 2:07
 bread -- 2023-05-16 14:05
 - Playlist methods now incorporated into __init__, only thing missing is the place to dump the info
 - May be defunct, need to run venv
+=======
+bread -- 2023-05-11 14:10
+- trouble with tuples
+- site map actually be working now + search 
+
+>>>>>>> Stashed changes

@@ -7,10 +7,11 @@
 
 // var dasbut = document.getElementById("b");
 // dasbut.addEventListener('click', ()=>{textChange()});
-const searchSong = document.getElementById("b");
-searchSong.addEventListener("click", loadButton);
 
-var loadButton = function() {
-    document.getElementById("search").innerHTML = "Loading";
-    console.log("working");
+var searchBtn = document.getElementById("b");
+
+var search = function() {
+    searchBtn.innerHTML = "poop";
 }
+
+searchBtn.addEventListener('click', search);
