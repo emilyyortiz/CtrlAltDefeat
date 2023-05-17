@@ -15,7 +15,8 @@ Visit our site to search for songs, build a playlist, and then see a wordcloud o
 * [Word Cloud API](https://github.com/stuy-softdev/notes-and-code/blob/main/api_kb/411_on_WordCloudAPI.md)
 
 ## Launch Codes
-Visit our website:   
+Visit our [website](https://crocodilecovers.me/) OR run locally 
+  
 How to clone/install:
 ```
 git clone git@github.com:eortiz-30/CtrlAltDefeat.git
