@@ -58,7 +58,9 @@ def authenticate():
 #forgot to actually allow a logout (I think it was in the site map)
 @app.route('/logout')
 def logout():
-  session.pop('username')
+  #session.pop('username')
+  print("popped user: " + 
+  session.pop('username'))
   return redirect('/')
 
 @app.route('/search', methods=['GET', 'POST'])
@@ -70,14 +72,15 @@ def query():
   return redirect('/home/' + query)
 
 #TODO: 
-#Display wordcloud on playlist  OUTLINED
-#Rip lyrics for wordcloud AND display  OUTLINED
+#Display wordcloud on playlist  DONE
+#Rip lyrics for wordcloud AND display  DONE
 #Select songs to play  OUTLINED
 #Play songs from button  OUTLINED
-#Search query entry from html, "entry" for the request
+#Search query entry from html, "entry" for the request DONE
 
 #BIG ISSUE: 
-#Where do we put a song into the playlist? 
+#Where do we put a song into the playlist? RESOLVED
+#How do we actually select a song? 
 
 #MAIN ISSUES: 
 #should the cover be updated every time the page is viewed? Seems intensive on the API
@@ -131,15 +134,7 @@ def home(que):
         #song link
         #link[].append(song.get("link")) #when links come into play
 
-      #clean string (later)
-      lyrics = lyrics.replace("******* This Lyrics is NOT for Commercial use *******", " ")
-      lyrics = lyrics.replace("...", " ")
-      lyrics = lyrics.replace("\\n", " ")
-      print("COMBINED LYRICS " + lyrics)
-      '''      
-      #wordcloud method
-      cloud = get_cloud(lyric)
-
+      '''
       return render_template('index.html', 
       word_cloud = cloud, 
       YTlinks = link, 
@@ -163,6 +158,8 @@ def home(que):
       current_song = search_res[0]
       print("cursong: ")
       print(current_song)
+      lyrics = current_song.get('lyrics')
+      
       #print("full search: " + music_api(query))
       #reference: 
       # {
@@ -172,6 +169,8 @@ def home(que):
       # "lyrics": "<insert lyrics here>"}
       # }
 
+
+
       #test adds all searched songs to playlist 
       #add_playlist(session['username'], current_song['title'], current_song['artist'], current_song['lyrics'])
 
@@ -179,9 +178,15 @@ def home(que):
       #print("\n\ncloud: " )
       #print(test_cloud)
 
+  #cleanse lyrics
+  lyrics = lyrics.replace("******* This Lyrics is NOT for Commercial use *******", " ")
+  lyrics = lyrics.replace("...", " ")
+  lyrics = lyrics.replace("\n", " ")
+  lyrics = lyrics.replace(")", ") ")
+  print("COMBINED LYRICS " + lyrics)
 
   #WORD CLOUD TEST
-  print("WORD CLOUD: \n\n https://quickchart.io/wordcloud?text=" + lyrics)
+  print("WORD CLOUD: \n\n https://quickchart.io/wordcloud?removeStopwordss=true&text=" + lyrics)
 
   return render_template('index.html')
 
