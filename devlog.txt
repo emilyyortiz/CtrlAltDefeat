@@ -98,14 +98,15 @@ bread -- 2023-05-11 14:05
 emilyO -- 2023-05-11 14:05
 - finish music_api() function in api_handle.py
 
+bread -- 2023-05-11 14:10
+- trouble with tuples
+- site map actually be working now + search 
+
 ryan -- 2023-05-11 14:15
 - finished playlist add and playlist remove and tested them
 
 emilyO -- 2023-05-11 16:35
 - found new api to use for wordcloud and explored it, made api kb card
-
-<<<<<<< Updated upstream
-===============================
 
 ryan -- 2023-05-12 13:54
 - finished the method that returns a user's playlist
@@ -126,12 +127,22 @@ yuki -- 2023-05-16 2:07
 
 ===============================
 
+yuki -- 2023-05-16 14:05
+- added team as users w sudo privilege on pooka server
+
 bread -- 2023-05-16 14:05
 - Playlist methods now incorporated into __init__, only thing missing is the place to dump the info
 - May be defunct, need to run venv
-=======
-bread -- 2023-05-11 14:10
-- trouble with tuples
-- site map actually be working now + search 
 
->>>>>>> Stashed changes
+===============================
+
+bread -- 2023-05-17 14:05
+- worked on delivering word cloud API
+
+yuki -- 2023-05-17 14:10
+- fixed search button again
+- made song info on html
+- need to fix JS for loading
+
+
+
