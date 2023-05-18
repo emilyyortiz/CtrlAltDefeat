@@ -134,22 +134,6 @@ def home(que):
         #song link
         #link[].append(song.get("link")) #when links come into play
 
-      '''
-      return render_template('index.html', 
-      word_cloud = cloud, 
-      YTlinks = link, 
-      playlist = pl, 
-      artists = artist, 
-      cur = current_song)
-      '''
-
-      #PAGE TAKES: 
-      # A image (?) type word cloud
-      # An array of youtube links
-      # An array of song names
-      # An array of artist names
-      # The current song being played
-    
     #if viewing a song not in playlist
     else:
       print("\n\n DEBUG: \n Query: ")
@@ -188,7 +172,34 @@ def home(que):
   #WORD CLOUD TEST
   print("WORD CLOUD: \n\n https://quickchart.io/wordcloud?removeStopwordss=true&text=" + lyrics)
 
-  return render_template('index.html')
+  cur_song = current_song.get('title')
+  cur_artist = current_song.get('artist')
+  cur_lyrics = current_song.get('lyrics')
+
+  return render_template('index.html',
+  song = cur_song, 
+  artist = cur_artist,
+  lyrics = cur_lyrics
+  )
+  
+
+
+  '''
+  return render_template('index.html', 
+  word_cloud = cloud, 
+  YTlinks = link, 
+  playlist = pl, 
+  artists = artist, 
+  cur = current_song)
+  '''
+
+  #PAGE TAKES: 
+  # A image (?) type word cloud
+  # An array of youtube links
+  # An array of song names
+  # An array of artist names
+  # The current song being played
+    
 
 
 if __name__ == '__main__':
