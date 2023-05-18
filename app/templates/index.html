@@ -59,14 +59,19 @@
                     </script>
                 </div> 
             </div>
-            <!-- <div class="row">
+            <div class="row">
                 <h2 class="text-success-emphasis text-center">{{song}} - {{artist}}</h2>
-                <p>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
                     Playlist: {{in_playlist}} <br>
                     Artist: {{artist}} <br>
-                    <a href> Watch music video here</a>
-                </p>
-            </div> -->
+                </div>
+                <div class="col-md-6">
+                    <iframe width="500" height="500" src="{{youtube_link}}">
+                    </iframe>
+                </div>
+            </div>
         </div>
     </body>
 </html>
