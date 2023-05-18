@@ -108,7 +108,6 @@ ryan -- 2023-05-11 14:15
 emilyO -- 2023-05-11 16:35
 - found new api to use for wordcloud and explored it, made api kb card
 
-<<<<<<< Updated upstream
 ryan -- 2023-05-12 13:54
 - finished the method that returns a user's playlist
 
@@ -146,9 +145,4 @@ yuki -- 2023-05-17 14:10
 - need to fix JS for loading
 
 
-=======
-bread -- 2023-05-11 14:10
-- trouble with tuples
-- site map actually be working now + search 
->>>>>>> Stashed changes
 
