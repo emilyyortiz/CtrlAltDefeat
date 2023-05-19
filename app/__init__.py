@@ -123,6 +123,7 @@ def home(que):
           #The title of the song is the i-th element in the first array of the playlist tuple
           #The current song element is the first element of the returned search
         current_song = music_api(pl[0][num])[0]
+        print(current_song)
         #get lyric method
         lyrics += current_song.get('lyrics')
         #lyrics test  
@@ -170,7 +171,7 @@ def home(que):
   print("COMBINED LYRICS " + lyrics)
 
   #WORD CLOUD TEST
-  print("WORD CLOUD: \n\n https://quickchart.io/wordcloud?removeStopwordss=true&text=" + lyrics)
+  cloud = "https://quickchart.io/wordcloud?removeStopwordss=true&text=" + lyrics
 
   cur_song = current_song.get('title')
   cur_artist = current_song.get('artist')
@@ -179,7 +180,8 @@ def home(que):
   return render_template('index.html',
   song = cur_song, 
   artist = cur_artist,
-  lyrics = cur_lyrics
+  lyrics = cur_lyrics,
+  word_cloud = cloud
   )
   
 
