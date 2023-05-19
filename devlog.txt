@@ -151,8 +151,13 @@ bread -- 2023-05-18 13:45
 - added html params for init
 
 yuki -- 2023-05-18 13:46
+- added word cloud and youtube frame
+- added basic song info
 
 ===============================
 
 bread -- 2023-05-19 14:05
 - handling bad searches
+
+yuki -- 2023-05-19 14:05
+- added playlist dropdowns and list groups for playlists

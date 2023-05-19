@@ -27,10 +27,30 @@
         </div>
         <div class="container-fluid bg-success-subtle p-4">
             <div class="row">
-                <div class="col-4">
+                <div class="col-5">
                     <h2 class="text-center text-success-emphasis">Playlists</h2>
+                    <div class="accordion">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                    {{playlist_name}}
+                                </button>
+                            </h3>
+                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+                                <div class="accordion-body">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">An item</li>
+                                        <li class="list-group-item">A second item</li>
+                                        <li class="list-group-item">A third item</li>
+                                        <li class="list-group-item">A fourth item</li>
+                                        <li class="list-group-item">And a fifth one</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-8">
+                <div class="col-7">
                     <p> Welcome to La La Lyle, Team Ctrl+Alt+Defeat's Karaoke website
                         inspired by the cartoon character and latest film adaptation, Lyle Lyle Crocodile.
                         Lyle is a singing crocodile, making him an apt mascot for our site!
@@ -58,8 +78,9 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    Playlist: {{in_playlist}} <br>
+                    Title: {{song_title}} <br>
                     Artist: {{artist}} <br>
+                    <button class="btn btn-outline-success">Add to playlist</button>
                 </div>
                 <div class="col-md-6">
                     <iframe width="500" height="500" src="{{youtube_link}}">
