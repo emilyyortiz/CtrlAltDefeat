@@ -67,9 +67,9 @@ def logout():
 def query():
   query = request.form.get('songInput')
   print(query)
-  if query == None:
+  if query == None or query.strip() == "" or "\\" in query.strip():
     query = "pl"
-  return redirect('/home/' + query)
+  return redirect('/home/' + query.strip())
 
 #TODO: 
 #Display wordcloud on playlist  DONE
@@ -139,10 +139,15 @@ def home(que):
       print("\n\n DEBUG: \n Query: ")
       print(que)
       search_res = music_api(que)
-      current_song = search_res[0]
-      print("cursong: ")
-      print(current_song)
-      lyrics = current_song.get('lyrics')
+      print(search_res)
+      if len(search_res) > 0 and search_res != "error":
+        current_song = search_res[0]
+        print("cursong: ")
+        print(current_song)
+        lyrics = current_song.get('lyrics')
+      else: 
+        current_song = "error"
+        
       
       #print("full search: " + music_api(query))
       #reference: 
@@ -172,6 +177,14 @@ def home(que):
   #WORD CLOUD TEST
   cloud = "https://quickchart.io/wordcloud?removeStopwordss=true&text=" + lyrics
 
+  #error case on search due to song not existing or api dying
+  if current_song == "error": 
+    cur_song = "Enter another song! We don't have this one"
+    return render_template('index.html',
+    song = cur_song
+    )
+
+  #if there are songs in the playlist, mainly used for default and searches
   if current_song is not None: 
     cur_song = current_song.get('title')
     cur_artist = current_song.get('artist')
@@ -184,6 +197,7 @@ def home(que):
     word_cloud = cloud
     )
   
+  #specific case of not having anything in the playlist
   else: 
     return render_template('index.html')
 
