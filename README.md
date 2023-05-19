@@ -25,7 +25,7 @@ How to run:
 ```
 cd CtrlAltDefeat
 pip install -r requirements.txt
-python app/__init__.py
+python3 app/__init__.py
 ```
 
 ## Data
