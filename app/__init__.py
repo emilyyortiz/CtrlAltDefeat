@@ -47,8 +47,8 @@ def make_account():
 #this method actually verifies whether or not the login works
 @app.route('/auth', methods=['GET', 'POST'])
 def authenticate():
-  print(check_pass(request.form.get('username'), request.form.get('password')))
-  print("login " + request.form.get('username') + " " + request.form.get('password'))
+  #print(check_pass(request.form.get('username'), request.form.get('password')))
+  #print("login " + request.form.get('username') + " " + request.form.get('password'))
   if not (check_pass(request.form.get('username'), request.form.get('password'))): #NEED method to take in a username and password and return if that entry exists
   #if(False):
     return render_template('login.html', status='Incorrect login info')
@@ -123,7 +123,6 @@ def home(que):
           #The title of the song is the i-th element in the first array of the playlist tuple
           #The current song element is the first element of the returned search
         current_song = music_api(pl[0][num])[0]
-        print(current_song)
         #get lyric method
         lyrics += current_song.get('lyrics')
         #lyrics test  
@@ -173,17 +172,20 @@ def home(que):
   #WORD CLOUD TEST
   cloud = "https://quickchart.io/wordcloud?removeStopwordss=true&text=" + lyrics
 
-  cur_song = current_song.get('title')
-  cur_artist = current_song.get('artist')
-  cur_lyrics = current_song.get('lyrics')
+  if current_song is not None: 
+    cur_song = current_song.get('title')
+    cur_artist = current_song.get('artist')
+    cur_lyrics = current_song.get('lyrics')
 
-  return render_template('index.html',
-  song = cur_song, 
-  artist = cur_artist,
-  lyrics = cur_lyrics,
-  word_cloud = cloud
-  )
+    return render_template('index.html',
+    song = cur_song, 
+    artist = cur_artist,
+    lyrics = cur_lyrics,
+    word_cloud = cloud
+    )
   
+  else: 
+    return render_template('index.html')
 
 
   '''
