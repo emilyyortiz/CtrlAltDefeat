@@ -1,0 +1,26 @@
+#log_body {
+    background-image: url("../lyle.png");
+    background-color: rgb(236,190,72);
+    height: 75%;
+    background-position: bottom right;
+    background-repeat: no-repeat;
+    background-size: 120%;
+}
+
+#reg_body {
+    background-image: url("../lyle.png");
+    background-color: rgb(0,0,0);
+    height: 75%;
+    background-position: bottom right;
+    background-repeat: no-repeat;
+    background-size: 120%;
+}
+#log_box {
+    background-color: rgba(0, 0, 0, 0.45);
+    border-radius: 15px;
+}
+
+#reg_box {
+    background-color: rgba(236,190,72,0.5);
+    border-radius: 15px;
+}
