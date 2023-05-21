@@ -10,19 +10,19 @@
         <link rel="stylesheet" href="../static/css/log_reg.css">
     </head>
     <body id="reg_body">
-        <div class="container-fluid" style = "height: 100vh">
-            <div class="row">
-              <div class="col">
-                <div class="d-flex align-items-center py-5">
+      <div class="container-fluid" style = "height: 100vh">
+         <div class="row">
+            <div class="col">
+             <div class="d-flex align-items-center py-5">
                   <div class="container">
                     <div class="row">
-                      <div class="col mx-auto" id="reg_box">
+                      <div class="col col-lg-8 mx-auto" id="reg_box">
 
                         <h1 class="text-center m-3 text-white display-1"> Crocodile Covers </h1>
                         <!-- <a href="/">
                           <img src = "../static/lyle.png" class="rounded mx-auto d-block" style = "height: 100px; width:100px">
                         </a> -->
-                        <h2 class="login-heading m-3 text-center">Sign Up</h2>
+                        <h2 class="login-heading m-3 text-warning text-center">Sign Up</h2>
                         <form class="px-4 py-3" action ="/signup" method="POST">
                           
                           <div class="form-floating m-3">
@@ -40,22 +40,25 @@
                             <label for="form_password">Confirm Password</label>
                           </div>
           
-                          <div class="text-center">
-                            <br> <button type="submit" class="user_button btn btn-lg" name="sub1" value="Sign In">Sign up</button>
+                          <div class="text-warning text-center">
+                            <br> <button type="submit" class="user_button btn btn-lg btn-outline-warning" name="sub1" value="Sign In">Sign up</button>
                           </div>
                           
                         </form>
-                      </div> <!-- close container to center stuff -->
-                      <div class="container-fluid text-center">
-                        <p class="text-danger">{{status}}</p>
-                        <p> Already have an account? </p> 
-                        <form action="/auth" method="GET">
-                          <button class="user_button btn btn-lg btn-outline-warning" value="login" name="sub1">Login</button>
-                        </form>  
-                      </div>  <!-- close login container -->
+                        
+                        <div class="container-fluid text-center">
+                          <p class="text-danger">{{status}}</p>
+                          <p class="text-white"> Already have an account? </p> 
+                          <form action="/auth" method="GET">
+                            <button class="user_button btn btn-lg btn-outline-warning" value="login" name="sub1">Login</button>
+                          </form>  
+                      </div>  <!-- close register container -->
+                      </div>
+                    </div>
                   </div>
-                  </div>
-                </div>
-                </div>
+             </div>
+            </div>
+        </div>
+      </div>
     </body>
 </html>

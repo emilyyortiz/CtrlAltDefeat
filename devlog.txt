@@ -161,3 +161,8 @@ bread -- 2023-05-19 14:05
 
 yuki -- 2023-05-19 14:05
 - added playlist dropdowns and list groups for playlists
+
+===============================
+
+yuki -- 2023-05-21 14:54
+- prettified login and register
