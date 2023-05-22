@@ -32,15 +32,15 @@
                     <div class="accordion">
                         <div class="accordion-item">
                             <h3 class="accordion-header">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                                    {{playlist_name}}
+                                <button id="playlist_0" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                    {{playlist}}
                                 </button>
                             </h3>
                             <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
                                 <div class="accordion-body">
                                     <ul class="list-group list-group-flush">
-                                        <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                                            The current link item
+                                        <a id="song_link_0" href="#" class="list-group-item list-group-item-action" aria-current="true">
+                                            {{song}}
                                         </a>
                                         <a href="#" class="list-group-item list-group-item-action">A second link item</a>
                                         <a href="#" class="list-group-item list-group-item-action">A third link item</a>
@@ -66,12 +66,18 @@
                             <input type="text" class="form-control" name="songInput" id="songInput" placeholder="Top of the World - Shawn Mendes">
                         </div>
                         <div class="form-group row mb-4">
-                           <button type="submit" class="btn btn-outline-success" id="b">
+                           <button type="submit" class="btn btn-outline-success" id="searchBtn">
                                 <span role="status" aria-hidden="true" id="spin">Search</span>
                             </button>
+                            <script>
+                                var searchBtn = document.getElementById("searchBtn");
+                                var search = function() {
+                                    searchBtn.innerHTML = "<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true' id='spin'></span>";  
+                                }
+                                searchBtn.addEventListener('click', search);
+                            </script>
                        </div>
                     </form>
-                    <script src="../static/js/foo.js"></script>
                 </div> 
             </div>
             <div class="row">
@@ -81,7 +87,9 @@
                 <div class="col-md-6">
                     Title: {{song_title}} <br>
                     Artist: {{artist}} <br>
-                    <button class="btn btn-outline-success">Add to playlist</button>
+                    <form action="/add/{{song_title}}/ - {{artist}}" method="GET">
+                        <button class="btn btn-outline-success">Add to playlist</button>
+                    </form>
                 </div>
                 <div class="col-md-6">
                     <iframe width="500" height="500" src="{{youtube_link}}">
@@ -90,5 +98,6 @@
                 </div>
             </div>
         </div>
+        <script src="../static/js/foo.js"></script>
     </body>
 </html>
