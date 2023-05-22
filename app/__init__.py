@@ -67,23 +67,26 @@ def logout():
 def query():
   query = request.form.get('songInput')
   print(query)
+  query = query.replace(")", ") ")
+  query = query.replace(".", " ")
+  query = query.replace("/", " ")
   if query == None or query.strip() == "" or "\\" in query.strip():
     query = "pl"
+  
   return redirect('/home/' + query.strip())
 
-#TODO: 
-#Display wordcloud on playlist  DONE
-#Rip lyrics for wordcloud AND display  DONE
-#Select songs to play  OUTLINED
-#Play songs from button  OUTLINED
-#Search query entry from html, "entry" for the request DONE
+@app.route('/add/<que>', methods=['GET','POST'])
+def add(que):
+  search_res = music_api(que)
+  if len(search_res) > 0 and search_res != "error":
+    current_song = search_res[0]
+    add_playlist(session['username'], 
+    current_song.get('title'),
+    current_song.get('artist'),
+    current_song.get('lyrics'))
+  return redirect("/home/" + que)
 
-#BIG ISSUE: 
-#Where do we put a song into the playlist? RESOLVED
-#How do we actually select a song? 
 
-#MAIN ISSUES: 
-#should the cover be updated every time the page is viewed? Seems intensive on the API
 @app.route('/home/<que>', methods=['GET', 'POST'])
 def home(que):
 
@@ -100,50 +103,49 @@ def home(que):
     lyrics = ""
 
 
-    #if song is default playlist, wordcloud update is necessary
-    if(que == "pl"):
+    print("\n\nplaylist stuff: ")
+    #gets the playlist for this user
+    pl = user_playlist(session['username'])
+    #print(pl)
 
-      #playlist population test
-      #add_playlist(session['username'], "test", "tester", "testtesttest")
+    collective = []
 
+    #INFORMATION IS ALL SAVED WITHIN THE PLAYLIST TUPLE OF ARRAYS
+    #get playlist method, load into array, find song information
+    for num in range(len(pl[0])):
 
-      print("\n\nplaylist stuff: ")
-      #gets the playlist for this user
-      pl = user_playlist(session['username'])
-      print(pl)
-      #print(len(pl))
-
-      #INFORMATION IS ALL SAVED WITHIN THE PLAYLIST TUPLE OF ARRAYS
-
-      #get playlist method, load into array, find song information
-      
-      for num in range(len(pl[0])):
-
-        #Explaining structure for future reference: 
-          #The title of the song is the i-th element in the first array of the playlist tuple
-          #The current song element is the first element of the returned search
-        current_song = music_api(pl[0][num])[0]
-        #get lyric method
+      #Explaining structure for future reference: 
+        #The title of the song is the i-th element in the first array of the playlist tuple
+        #The current song element is the first element of the returned search
+      current_song = music_api(pl[0][num])[0]
+      print(current_song)
+      #get lyric method
+      if(que == "pl"):
         lyrics += current_song.get('lyrics')
-        #lyrics test  
-        #print("COMBINED LYRICS: " + lyrics)
-        
-        #ALSO GET MORE INFORMATION ABOUT THE SONG TO DISPLAY! (FROM API)
-        #artist name
-        #song name
-        #song link
-        #link[].append(song.get("link")) #when links come into play
+      #lyrics test  
+      #print("COMBINED LYRICS: " + lyrics)
+      
+      #ALSO GET MORE INFORMATION ABOUT THE SONG TO DISPLAY! (FROM API)
+      #artist name
+      #song name
+      #song link
+      #link[].append(song.get("link")) #when links come into play
+      cur_log = [current_song.get("title"), current_song.get("artist")]
+      collective.append(cur_log)
+    print(collective)
+      
+
 
     #if viewing a song not in playlist
-    else:
+    if(que != "pl"):
       print("\n\n DEBUG: \n Query: ")
       print(que)
       search_res = music_api(que)
-      print(search_res)
+      #print(search_res)
       if len(search_res) > 0 and search_res != "error":
         current_song = search_res[0]
-        print("cursong: ")
-        print(current_song)
+        #print("cursong: ")
+        #print(current_song)
         lyrics = current_song.get('lyrics')
       else: 
         current_song = "error"
@@ -169,10 +171,11 @@ def home(que):
 
   #cleanse lyrics
   lyrics = lyrics.replace("******* This Lyrics is NOT for Commercial use *******", " ")
-  lyrics = lyrics.replace("...", " ")
   lyrics = lyrics.replace("\n", " ")
   lyrics = lyrics.replace(")", ") ")
-  print("COMBINED LYRICS " + lyrics)
+  lyrics = lyrics.replace(".", " ")
+  lyrics = lyrics.replace("/", " ")
+  #print("COMBINED LYRICS " + lyrics)
 
   #WORD CLOUD TEST
   cloud = "https://quickchart.io/wordcloud?removeStopwordss=true&text=" + lyrics
@@ -182,6 +185,7 @@ def home(que):
     cur_song = "Enter another song! We don't have this one"
     return render_template('index.html',
     song = cur_song
+    #playlist = collective
     )
 
   #if there are songs in the playlist, mainly used for default and searches
@@ -195,6 +199,7 @@ def home(que):
     artist = cur_artist,
     lyrics = cur_lyrics,
     word_cloud = cloud
+    #playlist = collective
     )
   
   #specific case of not having anything in the playlist

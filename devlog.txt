@@ -166,3 +166,9 @@ yuki -- 2023-05-19 14:05
 
 yuki -- 2023-05-21 14:54
 - prettified login and register
+
+===============================
+
+bread -- 2023-05-22 14:05
+- fix the database shit! Why is it adding "e"????
+- pass in playlist now
