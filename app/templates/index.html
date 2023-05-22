@@ -88,13 +88,13 @@
                     Title: {{song}} <br>
                     Artist: {{artist}} <br>
                     <form action="/add/{{song}}/ - {{artist}}" method="GET">
-                        <button class="btn btn-outline-success">Add to playlist</button>
+                        <button id="addToPlaylistBtn" class="btn btn-outline-success">Add to playlist</button>
                     </form>
+                    Lyrics: {{lyrics}}
                 </div>
                 <div class="col-md-6">
-                    <iframe width="500" height="500" src="{{youtube_link}}">
+                    <iframe width="300" height="200" src="{{youtube_link}}">
                     </iframe>
-                    <img src ="{{word_cloud}}">
                 </div>
             </div>
         </div>
