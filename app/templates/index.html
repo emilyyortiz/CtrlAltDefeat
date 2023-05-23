@@ -43,9 +43,6 @@
                                         <a id="song_link_0" href="#" class="list-group-item list-group-item-action" aria-current="true">
                                             {{song}}
                                         </a>
-                                        <a href="#" class="list-group-item list-group-item-action">A second link item</a>
-                                        <a href="#" class="list-group-item list-group-item-action">A third link item</a>
-                                        <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
                                     </ul>
                                 </div>
                             </div>
@@ -83,25 +80,60 @@
             </div>
             <hr class="mt-1 mb-1"/>
             <div class="row">
-                <h2 class="text-success-emphasis text-center">{{song}} - {{artist}}</h2>
+                <h2 class="text-success text-center">{{song}} - {{artist}}</h2>
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <h3 class="text-success-emphasis">Title: </h3>{{song}}
-                    <h3 class="text-success-emphasis">Artist: </h3>{{artist}}
+                    <div class="multiline">
+                        <h3 class="text-success-emphasis">Lyrics:</h3> {{lyrics}}
+                    </div>
                     <form action="/add" method="GET">
-
                         <input type="hidden" name="title" value="{{song}}" readonly><br>
                         <input type="hidden" name="artist" value="{{artist}}" readonly><br>
                         <input type="hidden" name="lyrics" value="{{lyrics}}" readonly>
-                        <button id="addToPlaylistBtn" class="btn btn-outline-success">Add to playlist</button>
                     </form>
-                    <div class="multiline">
-                        Lyrics: {{lyrics}}
-                    </div>
-                    <img src="{{word_cloud}}" width="100%">
+                    <button id="addToPlaylistBtn" type="button" class="btn btn-outline-success text-center" data-bs-toggle="modal" data-bs-target="#playlistModal">
+                        Add to playlist
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="playlistModal" tabindex="-1" aria-labelledby="playlistModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="playlistModalLabel">Add song to playlist</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-3 row">
+                                        <label for="title" class="col-sm-2 col-form-label">Title</label>
+                                        <div class="col-sm-10">
+                                          <input type="text" readonly class="form-control-plaintext" id="title" value="{{song}}">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="artist" class="col-sm-2 col-form-label">Artist</label>
+                                        <div class="col-sm-10">
+                                          <input type="text" readonly class="form-control-plaintext" id="artist" value="{{artist}}">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="playlistName" class="col-sm-2 col-form-label">Playlist Name</label>
+                                        <div class="col-sm-10">
+                                          <input type="text" class="form-control" id="playlistName">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Nevermind</button>
+                                    <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    <!-- end modal -->
                 </div>
                 <div class="col-md-6">
+                    <img src="{{word_cloud}}" width="100%">
                     <iframe width="300" height="200" src="{{youtube_link}}">
                     </iframe>
                 </div>
