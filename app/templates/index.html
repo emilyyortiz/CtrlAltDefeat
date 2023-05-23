@@ -22,18 +22,18 @@
                     <img src="../static/lyle.png" width="120%">
                 </div>
                 <div class="col-8">
-                    <h1 class="text-center text-success-emphasis">La La Lyle</h1>
+                    <h1 class="text-center text-success-emphasis display-1">Crocodile Covers</h1>
                 </div>
             </div>
         </div>
         <div class="container-fluid bg-success-subtle p-4">
             <div class="row">
                 <div class="col-5">
-                    <h2 class="text-center text-success-emphasis">Playlists</h2>
+                    <h2 class="text-center text-success-emphasis">Playlist</h2>
                     <div class="accordion">
                         <div class="accordion-item">
                             <h3 class="accordion-header">
-                                <button id="playlist_0" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                <button id="playlist_0" class="accordion-button bg-success" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
                                     {{playlist}}
                                 </button>
                             </h3>
@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <div class="col-7">
-                    <p> Welcome to La La Lyle, Team Ctrl+Alt+Defeat's Karaoke website
+                    <p> Welcome to <strong class="text-success">Crocodile Covers</strong>, Team Ctrl+Alt+Defeat's Karaoke website
                         inspired by the cartoon character and latest film adaptation, Lyle Lyle Crocodile.
                         Lyle is a singing crocodile, making him an apt mascot for our site!
                     </p>
@@ -63,7 +63,7 @@
 
                     <form action="/search" method="POST">
                         <div class = "form-group row mb-4">
-                            <label for="Song and Artist">Song - Artist</label>
+                            <label for="Song and Artist"> <small class="text-success-emphasis">Song - Artist</small></label>
                             <input type="text" class="form-control" name="songInput" id="songInput" placeholder="Top of the World - Shawn Mendes">
                         </div>
                         <div class="form-group row mb-4">
@@ -81,13 +81,14 @@
                     </form>
                 </div> 
             </div>
+            <hr class="mt-1 mb-1"/>
             <div class="row">
                 <h2 class="text-success-emphasis text-center">{{song}} - {{artist}}</h2>
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    Title: {{song}}
-                    Artist: {{artist}}
+                    <h3 class="text-success-emphasis">Title: </h3>{{song}}
+                    <h3 class="text-success-emphasis">Artist: </h3>{{artist}}
                     <form action="/add" method="GET">
 
                         <input type="hidden" name="title" value="{{song}}" readonly><br>
