@@ -75,21 +75,18 @@ def query():
   
   return redirect('/home/' + query.strip())
 
-@app.route('/add/<que>', methods=['GET','POST'])
-def add(que):
-  search_res = music_api(que)
-  if len(search_res) > 0 and search_res != "error":
-    current_song = search_res[0]
-    add_playlist(session['username'], 
-    current_song.get('title'),
-    current_song.get('artist'),
-    current_song.get('lyrics'))
-  return redirect("/home/" + que)
+@app.route('/add', methods=['GET','POST'])
+def add():
+  user = session["username"]
+  title = request.args.get("title")
+  artist = request.args.get("artist")
+  lyrics = request.args.get("lyrics")
+  add_playlist(user, title, artist, lyrics)
+  return redirect("/home/" + title + " - " + artist)
 
 
 @app.route('/home/<que>', methods=['GET', 'POST'])
 def home(que):
-
   #queri = request.args.get('que')
   #maybe unnecessary? 
   if ('username' not in session):
@@ -117,22 +114,24 @@ def home(que):
       #Explaining structure for future reference: 
         #The title of the song is the i-th element in the first array of the playlist tuple
         #The current song element is the first element of the returned search
-      current_song = music_api(pl[0][num])[0]
-      print(current_song)
-      #get lyric method
-      if(que == "pl"):
-        lyrics += current_song.get('lyrics')
-      #lyrics test  
-      #print("COMBINED LYRICS: " + lyrics)
-      
-      #ALSO GET MORE INFORMATION ABOUT THE SONG TO DISPLAY! (FROM API)
-      #artist name
-      #song name
-      #song link
-      #link[].append(song.get("link")) #when links come into play
-      cur_log = [current_song.get("title"), current_song.get("artist")]
-      collective.append(cur_log)
-    print(collective)
+      search_res = music_api(pl[0][num])
+      if len(search_res) > 0 and search_res != "error":
+        current_song = search_res[0]
+        #print(current_song)
+        #get lyric method
+        if(que == "pl"):
+          lyrics += current_song.get('lyrics')
+        #lyrics test  
+        #print("COMBINED LYRICS: " + lyrics)
+        
+        #ALSO GET MORE INFORMATION ABOUT THE SONG TO DISPLAY! (FROM API)
+        #artist name
+        #song name
+        #song link
+        #link[].append(song.get("link")) #when links come into play
+        cur_log = [current_song.get("title"), current_song.get("artist")]
+        collective.append(cur_log)
+    #print(collective)
       
 
 
@@ -161,24 +160,17 @@ def home(que):
       # }
 
 
-
-      #test adds all searched songs to playlist 
-      #add_playlist(session['username'], current_song['title'], current_song['artist'], current_song['lyrics'])
-
-      #test_cloud = wordcloud_api(current_song.get('lyrics'))
-      #print("\n\ncloud: " )
-      #print(test_cloud)
-
   #cleanse lyrics
   lyrics = lyrics.replace("******* This Lyrics is NOT for Commercial use *******", " ")
   lyrics = lyrics.replace("\n", " ")
   lyrics = lyrics.replace(")", ") ")
   lyrics = lyrics.replace(".", " ")
-  lyrics = lyrics.replace("/", " ")
+  lyrics = lyrics.replace("/", " ")[:-15]
   #print("COMBINED LYRICS " + lyrics)
 
   #WORD CLOUD TEST
-  cloud = "https://quickchart.io/wordcloud?removeStopwordss=true&text=" + lyrics
+  cloud = "https://quickchart.io/wordcloud?removeStopwords=true&text=" + lyrics
+  #print(cloud)
 
   #error case on search due to song not existing or api dying
   if current_song == "error": 
@@ -193,6 +185,10 @@ def home(que):
     cur_song = current_song.get('title')
     cur_artist = current_song.get('artist')
     cur_lyrics = current_song.get('lyrics')
+
+    #A special cleanse of lyrics for use in webpage
+    cur_lyrics = cur_lyrics.replace("******* This Lyrics is NOT for Commercial use *******", "")[:-15]
+    print(cur_lyrics)
 
     return render_template('index.html',
     song = cur_song, 
