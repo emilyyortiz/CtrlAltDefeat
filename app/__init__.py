@@ -154,14 +154,13 @@ def home(que):
         #print("cursong: ")
         #print(current_song)
         lyrics = current_song.get('lyrics')
-        #youtube = yt_api(current_song.get('title') + " - " + current_song.get('artist'))
       else: 
         current_song = "error"
       
     
     #getting youtube link for most currnt song
     youtube = None
-    if current_song != None: 
+    if current_song != None and current_song != "error": 
       youtube = yt_api(current_song.get('title') + " - " + current_song.get('artist'))
 
 
