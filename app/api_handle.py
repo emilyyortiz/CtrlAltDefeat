@@ -167,9 +167,9 @@ def yt_api(text):
 
     path = os.path.dirname(os.path.realpath(__file__)) # path to current python file
     
-    key = open(path + "/keys/key_api0", "r").read()
+    key = open(path + "/keys/key_api1", "r").read()
     key = key.strip()
-    key = "bcf1f8ef75efb2d2556095a49c736cc0f1806d13167b809e027e8a6c1b12b62c"
+    # key = "bcf1f8ef75efb2d2556095a49c736cc0f1806d13167b809e027e8a6c1b12b62c"
 
     querystring = {
         "api_key": key,
@@ -181,10 +181,10 @@ def yt_api(text):
     output_url = results["video_results"][0]["link"]
     return output_url
 
-print("hello-adele")
-print(yt_api("hello-adele"))
-print("sex sells - lovejoy")
-print(yt_api("sex sells - lovejoy"))
+# print("hello-adele")
+# print(yt_api("hello-adele"))
+# print("sex sells - lovejoy")
+# print(yt_api("sex sells - lovejoy"))
 
 
 # {'error': 'Invalid API key. Your API key should be here: https://serpapi.com/manage-api-key'}
