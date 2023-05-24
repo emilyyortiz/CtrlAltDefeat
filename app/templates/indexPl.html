@@ -1,0 +1,156 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>
+            Ctrl Alt Defeat Home
+        </title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+        <script src="../static/js/foo.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="../static/css/home.css">
+    </head>
+    <body>
+        <div class="d-flex flex-row-reverse bg-success-subtle p-2">
+            <form action="/logout" method="GET" class="align-items-center">
+                <button class="btn btn-outline-success" value="logout"> Logout </button>
+                <p>Currently logged in as {{user}}</p>
+            </form>
+        </div>
+        <div class="container-fluid"> 
+            <div class="row d-flex align-items-center justify-content-center">
+                <div class="col-4">
+                    <img src="../static/lyle.png" width="120%">
+                </div>
+                <div class="col-8">
+                    <h1 class="text-center text-success-emphasis display-1">Crocodile Covers</h1>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid bg-success-subtle p-4">
+            <div class="row">
+                <div class="col-5">
+                    <h2 class="text-center text-success-emphasis">Playlist</h2>
+                    <div class="accordion">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button id="playlist_0" class="accordion-button bg-success" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                    <p>Playlist</p>
+                                </button>
+                            </h3>
+                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+                                <div class="accordion-body">
+                                    <ul class="list-group list-group-flush">
+                                        <a id="song_link_0" href="#" class="list-group-item list-group-item-action" aria-current="true">
+                                            {{playlist}}
+                                        </a>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-7">
+                    <p> Welcome to <strong class="text-success">Crocodile Covers</strong>, Team Ctrl+Alt+Defeat's Karaoke website
+                        inspired by the cartoon character and latest film adaptation, Lyle Lyle Crocodile.
+                        Lyle is a singing crocodile, making him an apt mascot for our site!
+                    </p>
+                    <p> To get started, use the search bar below to add songs to playlists for a curated
+                        Karoake session!
+                    </p>
+
+                    <form action="/search" method="POST">
+                        <div class = "form-group row mb-4">
+                            <label for="Song and Artist"> <small class="text-success-emphasis">Song - Artist</small></label>
+                            <input type="text" class="form-control" name="songInput" id="songInput" placeholder="Top of the World - Shawn Mendes">
+                        </div>
+                        <div class="form-group row mb-4">
+                           <button type="submit" class="btn btn-outline-success" id="searchBtn">
+                                <span role="status" aria-hidden="true" id="spin">Search</span>
+                            </button>
+                            <script>
+                                var searchBtn = document.getElementById("searchBtn");
+                                var search = function() {
+                                    searchBtn.innerHTML = "<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true' id='spin'></span>";  
+                                }
+                                searchBtn.addEventListener('click', search);
+                            </script>
+                       </div>
+                    </form>
+                </div> 
+            </div>
+            <hr class="mt-1 mb-1"/>
+            <div class="row">
+                <h2 class="text-success text-center">{{song}} - {{artist}}</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="multiline">
+                        <h3 class="text-success-emphasis">Lyrics:</h3> {{lyrics}}
+                    </div>
+                    <form action="/rm" method="GET">
+                        <input type="hidden" name="title" value="{{song}}" readonly><br>
+                        <input type="hidden" name="artist" value="{{artist}}" readonly>
+                        <input type="submit" class="btn btn-outline-success" value="Remove from Playlist">
+                    </form>
+
+                    <!-- Modal -->
+                    <!--
+                    <button id="addToPlaylistBtn" type="button" class="btn btn-outline-success text-center" data-bs-toggle="modal" data-bs-target="#playlistModal">
+                        Add to playlist
+                    </button>
+                    
+                    <div class="modal fade" id="playlistModal" tabindex="-1" aria-labelledby="playlistModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="playlistModalLabel">Add song to playlist</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form action="/add" method="POST">
+                                    <div class="modal-body">
+                                        
+                                        <div class="mb-3 row">
+                                            <label for="title" class="col-sm-2 col-form-label">Title</label>
+                                            <div class="col-sm-10">
+                                            <input type="text" readonly class="form-control-plaintext" id="title" name="title" value="{{song}}">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="artist" class="col-sm-2 col-form-label">Artist</label>
+                                            <div class="col-sm-10">
+                                            <input type="text" readonly class="form-control-plaintext" id="artist" name="artist" value="{{artist}}">
+                                            </div>
+                                        </div>
+                                       
+                                        <div class="mb-3 row">
+                                            <label for="playlistName" class="col-sm-2 col-form-label">Playlist Name</label>
+                                            <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="playlistName">
+                                            </div>
+                                        </div>
+                         
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="hidden" id="lyrics" name="lyrics" value="{{lyrics}}">
+                                        <input type="hidden" id="title" name="title" value="{{song}}">
+                                        <input type="hidden" id="artist" name="artist" value="{{artist}}">
+                                        <button type="submit" class="btn btn-outline-success" data-bs-dismiss="modal">Add</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div> 
+                    -->
+                    <!-- end modal --> 
+                </div>
+                <div class="col-md-6">
+                    <img src="{{word_cloud}}" width="100%">
+                    <iframe width="300" height="200" src="{{youtube_link}}">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+        <script src="../static/js/foo.js"></script>
+    </body>
+</html>

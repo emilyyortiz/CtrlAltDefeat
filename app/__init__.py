@@ -1,7 +1,8 @@
+# coding=utf8
+
 from flask import Flask, render_template, session, request, redirect
 import sqlite3
 import os #?
-#more imports for other files later
 from api_handle import *
 from table_handle import *
 
@@ -49,24 +50,24 @@ def make_account():
 def authenticate():
   #print(check_pass(request.form.get('username'), request.form.get('password')))
   #print("login " + request.form.get('username') + " " + request.form.get('password'))
+  if not (check_user(request.form.get('username'))):
+    return render_template('login.html', status="User doesn't exist!")
   if not (check_pass(request.form.get('username'), request.form.get('password'))): #NEED method to take in a username and password and return if that entry exists
-  #if(False):
-    return render_template('login.html', status='Incorrect login info')
+    return render_template('login.html', status='Incorrect password!')
   session['username'] = request.form['username']
   return redirect('/home/pl')
 
 #forgot to actually allow a logout (I think it was in the site map)
 @app.route('/logout')
 def logout():
-  #session.pop('username')
-  print("popped user: " + 
-  session.pop('username'))
+  session.pop('username')
+  #"popped user: " + session.pop('username'))
   return redirect('/')
 
 @app.route('/search', methods=['GET', 'POST'])
 def query():
   query = request.form.get('songInput')
-  print(query)
+  #print(query)
   query = query.replace(")", ") ")
   query = query.replace(".", " ")
   query = query.replace("/", " ")
@@ -82,6 +83,14 @@ def add():
   artist = request.args.get("artist")
   lyrics = request.args.get("lyrics")
   add_playlist(user, title, artist, lyrics)
+  return redirect("/home/" + title + " - " + artist)
+
+@app.route('/rm', methods=['GET','POST'])
+def rm():
+  user = session["username"]
+  title = request.args.get("title")
+  artist = request.args.get("artist")
+  remove_playlist(user, title)
   return redirect("/home/" + title + " - " + artist)
 
 
@@ -100,7 +109,7 @@ def home(que):
     lyrics = ""
 
 
-    print("\n\nplaylist stuff: ")
+    #print("\n\nplaylist stuff: ")
     #gets the playlist for this user
     pl = user_playlist(session['username'])
     #print(pl)
@@ -114,7 +123,8 @@ def home(que):
       #Explaining structure for future reference: 
         #The title of the song is the i-th element in the first array of the playlist tuple
         #The current song element is the first element of the returned search
-      search_res = music_api(pl[0][num])
+      print(pl[0][num])
+      search_res = music_api(pl[0][num] + " - " + pl[1][num])
       if len(search_res) > 0 and search_res != "error":
         current_song = search_res[0]
         #print(current_song)
@@ -132,13 +142,11 @@ def home(que):
         cur_log = [current_song.get("title"), current_song.get("artist")]
         collective.append(cur_log)
     #print(collective)
-      
-
 
     #if viewing a song not in playlist
     if(que != "pl"):
-      print("\n\n DEBUG: \n Query: ")
-      print(que)
+      #print("\n\n DEBUG: \n Query: ")
+      #print(que)
       search_res = music_api(que)
       #print(search_res)
       if len(search_res) > 0 and search_res != "error":
@@ -146,28 +154,36 @@ def home(que):
         #print("cursong: ")
         #print(current_song)
         lyrics = current_song.get('lyrics')
+        #youtube = yt_api(current_song.get('title') + " - " + current_song.get('artist'))
       else: 
         current_song = "error"
-        
       
-      #print("full search: " + music_api(query))
-      #reference: 
-      # {
-      # "id": 247221810,
-      # "title": "Top Of The World",
-      # "artist": "Shawn Mendes",
-      # "lyrics": "<insert lyrics here>"}
-      # }
+    
+    #getting youtube link for most currnt song
+    youtube = None
+    if current_song != None: 
+      youtube = yt_api(current_song.get('title') + " - " + current_song.get('artist'))
 
+
+    #print("full search: " + music_api(query))
+    #reference: 
+    # {
+    # "id": 247221810,
+    # "title": "Top Of The World",
+    # "artist": "Shawn Mendes",
+    # "lyrics": "<insert lyrics here>"}
+    # }
 
   #cleanse lyrics
   lyrics = lyrics.replace("******* This Lyrics is NOT for Commercial use *******", " ")
   lyrics = lyrics.replace("\n", " ")
   lyrics = lyrics.replace(")", ") ")
   lyrics = lyrics.replace(".", " ")
+  lyrics = lyrics.replace("#", " ")
+  lyrics = lyrics.replace("?", " ")
   lyrics = lyrics.replace("/", " ")[:-15]
   #print("COMBINED LYRICS " + lyrics)
-
+  
   #WORD CLOUD TEST
   cloud = "https://quickchart.io/wordcloud?removeStopwords=true&text=" + lyrics
   #print(cloud)
@@ -176,8 +192,9 @@ def home(que):
   if current_song == "error": 
     cur_song = "Enter another song! We don't have this one"
     return render_template('index.html',
-    song = cur_song
-    #playlist = collective
+    song = cur_song,
+    user = session['username'],
+    playlist = collective
     )
 
   #if there are songs in the playlist, mainly used for default and searches
@@ -188,19 +205,34 @@ def home(que):
 
     #A special cleanse of lyrics for use in webpage
     cur_lyrics = cur_lyrics.replace("******* This Lyrics is NOT for Commercial use *******", "")[:-15]
-    print(cur_lyrics)
+    #print(cur_lyrics)
 
-    return render_template('index.html',
-    song = cur_song, 
-    artist = cur_artist,
-    lyrics = cur_lyrics,
-    word_cloud = cloud
-    #playlist = collective
-    )
+    #print(user_playlist(session['username'])[0])
+    if(cur_song in user_playlist(session['username'])[0]):
+      return render_template('indexPl.html',
+      song = cur_song, 
+      artist = cur_artist,
+      lyrics = cur_lyrics,
+      word_cloud = cloud,
+      user = session['username'],
+      youtube_link = youtube,
+      playlist = collective
+      )
+    else:
+      return render_template('index.html',
+      song = cur_song, 
+      artist = cur_artist,
+      lyrics = cur_lyrics,
+      word_cloud = cloud,
+      user = session['username'],
+      youtube_link = youtube,
+      playlist = collective
+      )
   
   #specific case of not having anything in the playlist
   else: 
-    return render_template('index.html')
+    return render_template('index.html',
+    user = session['username'])
 
 
   '''
