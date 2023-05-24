@@ -14,8 +14,3 @@ var search = function() {
 var searchBtn = document.getElementById("searchBtn");
 searchBtn.addEventListener('click', search);
 
-//testing parsing playlist array
-const playlistJSON = '["Poop", "Mr. Poop"]';
-const playlistArray = JSON.parse(playlistJSON);
-// document.getElementById("playlist_0").innerHTML = playlistArray[0];
-console.log(playlistArray[0]);
