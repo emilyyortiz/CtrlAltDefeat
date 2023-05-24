@@ -115,9 +115,9 @@
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
-                                        <label for="playlistName" class="col-sm-2 col-form-label">Playlist Name</label>
+                                        <label for="playlist" class="col-sm-2 col-form-label">Playlist Name</label>
                                         <div class="col-sm-10">
-                                          <input type="text" class="form-control" id="playlistName">
+                                          <input type="text" class="form-control" id="playlist">
                                         </div>
                                     </div>
                                 </div>
@@ -132,9 +132,9 @@
                                             // create playlist
                                             var playlistAccord = document.getElementById("playlistAccordion");
                                             playlistAccord.classList.replace('invisible', 'visible');
-                                            var playlistName = document.getElementById("playlistName").value;
+                                            var playlist = document.getElementById("playlist").value;
                                             var playlistAccordName = document.getElementById("playlistAccordName");
-                                            playlistAccordName.innerText = playlistName;
+                                            playlistAccordName.innerText = playlist;
 
                                             // add to playlist
 
