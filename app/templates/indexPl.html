@@ -88,11 +88,10 @@
                     <div class="multiline">
                         <h3 class="text-success-emphasis">Lyrics:</h3> {{lyrics}}
                     </div>
-                    <form action="/add" method="GET">
+                    <form action="/rm" method="GET">
                         <input type="hidden" name="title" value="{{song}}" readonly><br>
-                        <input type="hidden" name="artist" value="{{artist}}" readonly><br>
-                        <input type="hidden" name="lyrics" value="{{lyrics}}" readonly>
-                        <input type="submit" class="btn btn-outline-success" value="Add to Playlist">
+                        <input type="hidden" name="artist" value="{{artist}}" readonly>
+                        <input type="submit" class="btn btn-outline-success" value="Remove from Playlist">
                     </form>
 
                     <!-- Modal -->
@@ -123,47 +122,22 @@
                                             <input type="text" readonly class="form-control-plaintext" id="artist" name="artist" value="{{artist}}">
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="mb-3 row">
-                                        <label for="playlist" class="col-sm-2 col-form-label">Playlist Name</label>
-                                        <div class="col-sm-10">
-                                          <input type="text" class="form-control" id="playlist">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Nevermind</button>
-                                    <button id="playlistBtn" type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Add</button>
-
-                                    <script>
                                        
-                                        var crtPlaylist = function() {
-
-                                            // create playlist
-                                            var playlistAccord = document.getElementById("playlistAccordion");
-                                            playlistAccord.classList.replace('invisible', 'visible');
-                                            var playlist = document.getElementById("playlist").value;
-                                            var playlistAccordName = document.getElementById("playlistAccordName");
-                                            playlistAccordName.innerText = playlist;
-
-                                            // add to playlist
-
-                                            var songList = document.getElementById("songList");
-                                            var newSong = document.createElement("a");
-                                        //     <a id="song_link_0" href="#" class="list-group-item list-group-item-action" aria-current="true">
-                                        //     {{song}} - {{artist}}
-                                        // </a>
-                                            newSong.href = "{{youtube_link}}";
-                                            newSong.classList.add("list-group-item");
-                                            newSong.classList.add("list-group-item-action");
-                                            newSong.appendChild(document.createTextNode("{{song}} - {{artist}}"));
-                                            songList.appendChild(newSong);
-
-                                        }
-                                        var playlistBtn = document.getElementById("playlistBtn");
-                                        playlistBtn.addEventListener('click', crtPlaylist);
-                                    </script>
-                                </div>
+                                        <div class="mb-3 row">
+                                            <label for="playlistName" class="col-sm-2 col-form-label">Playlist Name</label>
+                                            <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="playlistName">
+                                            </div>
+                                        </div>
+                         
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="hidden" id="lyrics" name="lyrics" value="{{lyrics}}">
+                                        <input type="hidden" id="title" name="title" value="{{song}}">
+                                        <input type="hidden" id="artist" name="artist" value="{{artist}}">
+                                        <button type="submit" class="btn btn-outline-success" data-bs-dismiss="modal">Add</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div> 

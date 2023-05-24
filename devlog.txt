@@ -182,3 +182,14 @@ bread -- 2023-05-22 21:21
 - add playlist now does not require an extra api call 
 - TODO: playlist has to display on homepage and reroute properly!
 - TODO: UTF-8 decoding unicode problems - try decoding strings before replaces?
+
+===============================
+
+bread -- 2023-05-23 20:00
+- added ability to remove from playlist (creating a full redirect to another page)
+- fixed login statuses
+- added better sanitaztion
+- added current user on homepage 
+- unicode problem jsut doesn't occur when no prints???
+- fixed issue where playlist result was inaccurate 
+- implemented YT_api
