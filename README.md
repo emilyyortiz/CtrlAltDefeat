@@ -29,5 +29,5 @@ python3 app/__init__.py
 ```
 
 ## Data
-Description  
-Source
+The data visualized by our site is song lyrics. A word cloud for each song highlights the most common words.  
+Source: musiXMatch
