@@ -185,6 +185,9 @@ bread -- 2023-05-22 21:21
 
 ===============================
 
+emilyO -- 2023-05-23 14:00
+- wrote api method to return youtube video link
+
 bread -- 2023-05-23 20:00
 - added ability to remove from playlist (creating a full redirect to another page)
 - fixed login statuses
@@ -193,3 +196,9 @@ bread -- 2023-05-23 20:00
 - unicode problem jsut doesn't occur when no prints???
 - fixed issue where playlist result was inaccurate 
 - implemented YT_api
+
+===============================
+
+emilyO -- 2023-05-25 11:50
+- complete final deliverables
+- update devlog, design doc
